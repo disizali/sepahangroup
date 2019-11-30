@@ -1,0 +1,35 @@
+.socials {
+  margin: $boxMargin;
+  display: flex;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 10px;
+    background: white;
+    border-radius: $radius;
+    box-shadow: 0 2px rgba(145, 145, 145, 0.7);
+    height: 100px;
+    transition: box-shadow 0.5s ease;
+    &:hover > i {
+      margin: 0 13px;
+    }
+    &:hover > span {
+      margin: 0 13px;
+    }
+    i,
+    span {
+      margin: 0 10px;
+      transition: margin 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    i {
+      color: $secondColor;
+      font-size: 1.8em;
+    }
+    span {
+      color: $secondColor;
+      font-size: 1.2em;
+    }
+  }
+}

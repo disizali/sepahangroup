@@ -1,0 +1,25 @@
+@import "variables";
+@import "commons";
+@import "fonts";
+@import "navbar";
+@import "slider";
+@import "slider2";
+@import "static";
+@import "static2";
+@import "employees";
+@import "socials";
+@import "blog";
+@import "about";
+@import "footer";
+
+.rtl {
+  direction: rtl;
+}
+body {
+  background: #f1f1f1;
+  margin: 0;
+  padding: 0;
+}
+.children {
+  padding-top: 60px;
+}

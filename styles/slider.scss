@@ -1,0 +1,62 @@
+.slider > div {
+  position: relative;
+  margin: $boxMargin;
+  background: white;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  overflow: hidden;
+  height: 800px;
+  img {
+    transition: 1s all;
+  }
+  img[src$="slide1.jpg"] {
+    position: absolute;
+    left: 100%;
+    &.active {
+      left: 0;
+    }
+  }
+  img[src$="slide2.jpg"] {
+    position: absolute;
+    left: -100%;
+    &.active {
+      left: 0;
+    }
+  }
+  .selector {
+    width: 50%;
+    height: 40px;
+    background: $primaryColor;
+    position: absolute;
+    transition: all 1s ease;
+    border-radius: $radius $radius 0 0;
+    &.selected-1 {
+      left: 0;
+    }
+    &.selected-2 {
+      left: 50%;
+    }
+  }
+  .switcher {
+    display: flex;
+    bottom: 0;
+    position: absolute;
+    justify-content: space-between;
+    height: 40px;
+    width: 100%;
+    button {
+      width: 50%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      z-index: 1;
+      transition: 1s all;
+      color: white;
+      text-shadow: $shadow;
+      font-size: 1.2rem;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

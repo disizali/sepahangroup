@@ -1,0 +1,33 @@
+footer {
+  border-top: 10px solid $primaryColor;
+  background: $secondColor;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  div {
+    text-align: center;
+    width: calc(100% / 3);
+    h3 {
+      color: white;
+    }
+    ul {
+      padding: 0;
+      list-style: none;
+      li {
+        margin: 10px 0;
+        color: $secondHoverColor;
+        transition: 0.5s;
+        &:hover {
+          color: $primaryColor;
+          margin-right: 5px;
+        }
+      }
+    }
+    &.footer-contact {
+      span {
+        display: inline-block;
+        margin: 0 5px;
+      }
+    }
+  }
+}

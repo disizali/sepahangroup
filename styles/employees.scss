@@ -1,0 +1,42 @@
+.employees {
+  > div {
+    margin: $boxMargin;
+    background: white;
+    box-shadow: $shadow;
+    border-radius: $radius;
+    padding: $boxPadding;
+    > ul {
+      padding: 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      li {
+        display: flex;
+        > img,
+        > div {
+          margin: 0 5px;
+        }
+        > img {
+          width: 100px;
+          height: 100px;
+          background: $primaryColor;
+          border-radius: $radius;
+        }
+        > div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          strong {
+            padding-right: $boxPadding;
+          }
+          > strong {
+            background: $lightColor;
+            color: white;
+            border-radius: $radius;
+          }
+        }
+      }
+    }
+  }
+}

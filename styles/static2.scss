@@ -1,0 +1,55 @@
+.static2 {
+  height: 40vmin;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  i {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    right: 5%;
+  }
+  .square {
+    background-color: rgb(122, 74, 170);
+    background-image: url("https://www.transparenttextures.com/patterns/brushed-alum-dark.png");
+    border-radius: 10px;
+  }
+  .square-2 {
+    background-color: rgb(64, 39, 88);
+    background-image: url("https://www.transparenttextures.com/patterns/brushed-alum-dark.png");
+    border-radius: 10px;
+    transform: rotate(10deg);
+    z-index: 1;
+    img {
+      width: 100%;
+      margin: auto;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      transform: rotate(-10deg);
+      filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.3));
+    }
+  }
+  div:last-child {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    text-align: right;
+    right: calc(10% + 300px);
+    h3,p{
+        width: 100%;
+    }
+    h3 {
+      color: rebeccapurple;
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.5rem;
+      color: $lightColor;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.login-container {
+  background: white;
+  border-radius: $radius;
+  position: absolute;
+  margin: auto;
+  left: 0px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 25%;
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  &.deactive {
+    border-bottom: 2px solid rgba(143, 143, 143, 0.5);
+  }
+  &.failed {
+    border-bottom: 2px solid rgb(185, 63, 63);
+  }
+  span {
+    transition: all 0.3s;
+  }
+}
