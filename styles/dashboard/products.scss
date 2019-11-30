@@ -17,8 +17,16 @@
   margin: 10px;
   width: 100%;
   border-radius: $radius;
+  border: 2px solid #f0f3f9;
+  background: white;
+  transition: background 0.5s;
   &.active {
-    background: cyan;
+    color: white;
+    background: linear-gradient(
+      109.6deg,
+      rgba(61, 121, 176, 1) 11.3%,
+      rgba(35, 66, 164, 1) 91.1%
+    );
   }
 }
 .input-type {
@@ -35,16 +43,21 @@
   // box-shadow: $boxShadow;
 }
 .type-item {
-  background: rgb(226, 152, 34);
+  background: white;
+  border: 1px solid #f1f1f1;
   border-radius: $radius;
   padding: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
-  border: none;
   margin: 10px 0px;
 }
-.type-header{
+.type-header {
   display: flex;
   justify-content: space-between;
+  color: rgb(196, 202, 216);
+}
+.dashboard-container {
+  .groups {
+    flex-direction: column;
+  }
 }

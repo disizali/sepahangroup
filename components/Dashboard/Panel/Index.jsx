@@ -6,7 +6,7 @@ export class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tab: 1
+      tab: 2
     };
     this.changeTab = this.changeTab.bind(this);
     this.getTabPanel = this.getTabPanel.bind(this);
@@ -31,13 +31,13 @@ export class Index extends Component {
       <div>
         <ul className="tabs rtl" style={{ display: "flex", listStyle: "none" }}>
           <li
-            class={`${tab == 1 && `active`}`}
+            className={`${tab == 1 && `active`}`}
             onClick={() => this.changeTab(1)}
           >
             مقالات
           </li>
           <li
-            class={`${tab == 2 && `active`}`}
+            className={`${tab == 2 && `active`}`}
             onClick={() => this.changeTab(2)}
           >
             محصولات

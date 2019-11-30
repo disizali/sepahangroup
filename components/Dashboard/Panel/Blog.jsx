@@ -91,17 +91,17 @@ export class Blog extends Component {
     return (
       <div className="dashboard-container rtl">
         <div className="dashboard-actions">
-          <h1>{editable ? "ویرایش مقاله" : "افزودن مقاله جدید"} :</h1>
-          <p>تصویر : </p>
+          <h1>{editable ? "ویرایش مقاله" : "افزودن مقاله جدید"}</h1>
+          <p>تصویر</p>
           <input type="file" name="image" onChange={this.handleImageChange} />
-          <p>سربرگ : </p>
+          <p>سربرگ</p>
           <input
             type="text"
             name="title"
             value={title}
             onChange={this.handleChange}
           />
-          <p>متن پست : </p>
+          <p>متن</p>
           <textarea
             type="text"
             name="body"
@@ -118,11 +118,11 @@ export class Blog extends Component {
           </div>
         </div>
         <hr />
-        <h2> پست ها :</h2>
+        <h2>مقالات</h2>
         <div className="posts-list" style={{ textAlign: "left" }}>
           <div className="posts-list-header">
             <span width="40%">سربرگ</span>
-            <span width="40%">متن پست</span>
+            <span width="40%">متن</span>
             <span width="20%">عملیات</span>
           </div>
           <div className="posts-list-data">

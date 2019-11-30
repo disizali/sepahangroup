@@ -80,7 +80,7 @@ export class Product extends Component {
     return (
       <div className="dashboard-container rtl">
         <div className="dashboard-actions">
-          <h1>افزودن محصول جدید :</h1>
+          <h1>افزودن گروه جدید :</h1>
           <p>نام</p>
           <input
             type="text"
@@ -100,26 +100,28 @@ export class Product extends Component {
         </div>
         <hr />
         <div className="products-list">
-          <h2>لیست محصولات</h2>
-          <div>
-            {products.length == 0 && "هنوز محصولی اضافه نشده است"}
-            {products.map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  className={`product-item ${
-                    product.id == item.id ? `active` : ``
-                  }`}
-                  onClick={() => this.selectProduct(item.id)}
-                >
-                  {item.name}
-                </div>
-              );
-            })}
+          <div className="groups">
+            <h2>لیست گروه ها</h2>
+            <div>
+              {products.length == 0 && "هنوز محصولی اضافه نشده است"}
+              {products.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`product-item ${
+                      product.id == item.id ? `active` : ``
+                    }`}
+                    onClick={() => this.selectProduct(item.id)}
+                  >
+                    {item.name}
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="products-splitter">.</div>
           <div>
-            <h2>انواع این محصول</h2>
+            <h2>انواع محصولات این گروه</h2>
             {product.Types.length == 0 && "این دسته بندی هیچ آیتمی ندارد"}
             {product.Types.length != 0 && (
               <div className="type-header">
