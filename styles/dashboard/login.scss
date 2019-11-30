@@ -1,5 +1,106 @@
 .login-container {
-  background: white;
+  display: flex;
+  width: 80%;
+  height: 50%;
+  background: yellow;
+  border-radius: $radius;
+  overflow: hidden;
+  > div:first-child {
+    height: 100%;
+    width: 40%;
+    background-image: radial-gradient(
+      circle farthest-corner at -0.2% 99.7%,
+      rgba(190, 53, 145, 1) 0%,
+      rgba(239, 69, 115, 1) 100.2%
+    );
+    h3 {
+      right: 40px;
+      position: relative;
+      color: white;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: rgba(255, 255, 255, 0.2);
+        right: -25px;
+        border-radius: $radius;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        background: rgba(255, 255, 255, 0.2);
+        right: -35px;
+        border-radius: $radius;
+        margin: auto;
+        top: 0;
+        bottom: 5px;
+      }
+    }
+    h1 {
+      align-items: center;
+      display: flex;
+      position: absolute;
+      height: 100%;
+      right: 50px;
+      top: 0;
+      color: white;
+      span {
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          width: 50%;
+          height: 3px;
+          border-radius: $radius;
+          margin: auto;
+          bottom: -20px;
+          right: 0;
+          background: white;
+        }
+      }
+    }
+  }
+
+  > div:last-child {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    > div {
+      width: 100%;
+    }
+    width: 60%;
+    background: white;
+    p,
+    input {
+      margin-right: 20px;
+    }
+    p {
+      color: rgb(190, 53, 145);
+      font-size: 1.2rem;
+    }
+    textarea,
+    input {
+      &:focus {
+        outline: none;
+      }
+      padding: 0 10px;
+      font-size: 1rem;
+      width: 70%;
+      height: 40px;
+      background: white;
+      border: 2px solid #f0f3f9;
+      border-radius: $radius;
+    }
+  }
+
   border-radius: $radius;
   position: absolute;
   margin: auto;
@@ -7,20 +108,24 @@
   right: 0;
   top: 0;
   bottom: 0;
-  width: 25%;
-  height: 25%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: all 1s;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  button {
+    background: rgb(190, 53, 145);
+    color: white;
+    font-size: 1.1rem;
+    border-radius: $radius;
+    padding: 10px 30px;
+    border: none;
+    &:hover {
+      cursor: pointer;
+      background: rgb(150, 53, 145);
+    }
+  }
+  transition: border-bottom 0.5s;
   &.deactive {
-    border-bottom: 2px solid rgba(143, 143, 143, 0.5);
+    border-bottom: 5px solid white;
   }
   &.failed {
-    border-bottom: 2px solid rgb(185, 63, 63);
+    border-bottom: 5px solid rgb(150, 53, 145);
   }
   span {
     transition: all 0.3s;

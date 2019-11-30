@@ -29,29 +29,20 @@ export class Index extends Component {
     const { tab } = this.state;
     return (
       <div>
-        <ul style={{ display: "flex", listStyle: "none" }}>
-          <li>
-            <button
-              onClick={() => this.changeTab(1)}
-              style={{
-                backgroundColor: tab == 1 ? "cyan" : "white"
-              }}
-            >
-              Blog
-            </button>
+        <ul className="tabs rtl" style={{ display: "flex", listStyle: "none" }}>
+          <li
+            class={`${tab == 1 && `active`}`}
+            onClick={() => this.changeTab(1)}
+          >
+            مقالات
           </li>
-          <li>
-            <button
-              onClick={() => this.changeTab(2)}
-              style={{
-                backgroundColor: tab == 2 ? "cyan" : "white"
-              }}
-            >
-              Products
-            </button>
+          <li
+            class={`${tab == 2 && `active`}`}
+            onClick={() => this.changeTab(2)}
+          >
+            محصولات
           </li>
         </ul>
-        <hr />
         {this.getTabPanel()}
       </div>
     );

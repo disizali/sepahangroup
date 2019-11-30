@@ -10,13 +10,11 @@
   .first-post {
     width: 60%;
     margin-left: 5px;
-    // display: flex;
     .post-content {
       display: flex;
       margin-top: 15px;
     }
     img {
-      background: $secondColor;
       width: 25%;
       height: 200px;
       border-radius: $radius;
@@ -52,7 +50,6 @@
             width: 50px;
             height: 50px;
             border-radius: $radius;
-            background: $secondColor;
           }
           span,
           i {

@@ -4,7 +4,13 @@ import * as api from "../../../src/api";
 export class Blog extends Component {
   constructor(props) {
     super(props);
-    this.state = { title: "test title", body: "test body", image: "", posts: [], editable: false };
+    this.state = {
+      title: "تست سربرگ",
+      body: "تست بدنه",
+      image: "",
+      posts: [],
+      editable: false
+    };
     this.handleChange = this.handleChange.bind(this);
     this.sendPost = this.sendPost.bind(this);
     this.startUpdate = this.startUpdate.bind(this);
@@ -25,16 +31,16 @@ export class Blog extends Component {
     this.setState({ [e.target.name]: e.target.files[0] });
   }
   async sendPost() {
-      const { title, body, image, posts } = this.state;
-      if (!title || !body || !image) {
-        return alert("لطفا ورودی های خودتون رو چک کنید");
-      }
-      const post = await api.sendPost({ title, body, image });
-      if (post == "failed") {
-        return alert("لطفا ورودی های خودتون رو چک کنید");
-      }
-      this.setState({ posts: [post, ...posts] });
-      return alert("پست اضافه شد");
+    const { title, body, image, posts } = this.state;
+    if (!title || !body || !image) {
+      return alert("لطفا ورودی های خودتون رو چک کنید");
+    }
+    const post = await api.sendPost({ title, body, image });
+    if (post == "failed") {
+      return alert("لطفا ورودی های خودتون رو چک کنید");
+    }
+    this.setState({ posts: [post, ...posts] });
+    return alert("پست اضافه شد");
   }
   startUpdate(id) {
     const { posts } = this.state;
@@ -83,61 +89,67 @@ export class Blog extends Component {
   render() {
     const { title, body, image, posts, editable } = this.state;
     return (
-      <div>
-        <h1>Blog Tab</h1>
-        <br />
-        <h2>{editable ? "Edit" : "Add"} Post :</h2>
-        <p>Image : </p>
-        <input type="file" name="image" onChange={this.handleImageChange} />
-        <p>Title : </p>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={this.handleChange}
-        />
-        <p>Body : </p>
-        <textarea
-          type="text"
-          name="body"
-          value={body}
-          onChange={this.handleChange}
-        ></textarea>
-        <br />
-        <div style={{ display: editable ? "none" : "block" }}>
-          <button onClick={this.sendPost}>SEND</button>
-        </div>
-        <div style={{ display: editable ? "flex" : "none" }}>
-          <button onClick={this.updatePost}>SAVE</button>
-          <button onClick={this.cancelUpdate}>CANCEL</button>
+      <div className="dashboard-container rtl">
+        <div className="dashboard-actions">
+          <h1>{editable ? "ویرایش مقاله" : "افزودن مقاله جدید"} :</h1>
+          <p>تصویر : </p>
+          <input type="file" name="image" onChange={this.handleImageChange} />
+          <p>سربرگ : </p>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={this.handleChange}
+          />
+          <p>متن پست : </p>
+          <textarea
+            type="text"
+            name="body"
+            value={body}
+            onChange={this.handleChange}
+          ></textarea>
+          <br />
+          <div style={{ display: editable ? "none" : "block" }}>
+            <button onClick={this.sendPost}>SEND</button>
+          </div>
+          <div style={{ display: editable ? "flex" : "none" }}>
+            <button onClick={this.updatePost}>SAVE</button>
+            <button onClick={this.cancelUpdate}>CANCEL</button>
+          </div>
         </div>
         <hr />
-        <h2> Blog Posts :</h2>
-        <table style={{ textAlign: "left" }}>
-          <thead>
-            <tr>
-              <th width="40%">title</th>
-              <th width="40%">body</th>
-              <th width="20%">actions</th>
-            </tr>
-          </thead>
-          <tbody>
+        <h2> پست ها :</h2>
+        <div className="posts-list" style={{ textAlign: "left" }}>
+          <div className="posts-list-header">
+            <span width="40%">سربرگ</span>
+            <span width="40%">متن پست</span>
+            <span width="20%">عملیات</span>
+          </div>
+          <div className="posts-list-data">
             {posts.map((item, index) => {
               return (
-                <tr key={index}>
-                  <td>{item.title}</td>
-                  <td>{item.body}</td>
-                  <td>
-                    <button onClick={() => this.deletePost(item.id)}>X</button>
-                    <button onClick={() => this.startUpdate(item.id)}>
-                      Edit
+                <div key={index}>
+                  <span>{item.title}</span>
+                  <span>{item.body}</span>
+                  <div>
+                    <button
+                      className="remove"
+                      onClick={() => this.deletePost(item.id)}
+                    >
+                      حذف
                     </button>
-                  </td>
-                </tr>
+                    <button
+                      className="edit"
+                      onClick={() => this.startUpdate(item.id)}
+                    >
+                      ویرایش
+                    </button>
+                  </div>
+                </div>
               );
             })}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
     );
   }

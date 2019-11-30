@@ -35,30 +35,44 @@ export default class Login extends Component {
         <Head>
           <title>سپاهان گروپ - پنل مدیریت</title>
         </Head>
-        <div className={`login-container ${error ? "failed" : "deactive"}`}>
-          <p>UserName : </p>
-          <input
-            type="text"
-            value={username}
-            name="username"
-            onChange={this.handleChanges}
-            onKeyPress={this.handleKeys}
-          />
-          <br />
-          <p>Password : </p>
-          <input
-            type="password"
-            value={password}
-            name="password"
-            onKeyPress={this.handleKeys}
-            onChange={this.handleChanges}
-          />
-          <br />
-          <span style={{ opacity: error ? 1 : 0 }}>
-            نام کاربری یا رمز عبور اشتباه است
-          </span>
-          <br />
-          <button onClick={this.login}>LOGIN</button>
+        <div className={`login-container rtl ${error ? "failed" : "deactive"}`}>
+          <div>
+            <h3>گروه سپاهان</h3>
+            <h1>
+              <span>پنل مدیریت</span>
+            </h1>
+          </div>
+          <div>
+            <div>
+              <p>نام کاربری : </p>
+              <input
+                type="text"
+                autoComplete="false"
+                autoCorrect="false"
+                value={username}
+                name="username"
+                onChange={this.handleChanges}
+                onKeyPress={this.handleKeys}
+              />
+            </div>
+            <div>
+              <p>رمز عبور : </p>
+              <input
+                type="password"
+                autoComplete="false"
+                autoCorrect="false"
+                value={password}
+                name="password"
+                onKeyPress={this.handleKeys}
+                onChange={this.handleChanges}
+              />
+            </div>
+            <span style={{ opacity: error ? 1 : 0 }}>
+              نام کاربری یا رمز عبور اشتباه است
+            </span>
+            <br />
+            <button onClick={this.login}>ورود</button>
+          </div>
         </div>
       </div>
     );
