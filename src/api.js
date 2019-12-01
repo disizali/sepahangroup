@@ -30,16 +30,24 @@ export const updatePost = async data => {
   const { data: result } = await axios.put(`${API}/posts`, data);
   return result;
 };
-
 export const getProducts = async () => {
   const { data: posts } = await axios.get(`${API}/products`);
   return posts;
 };
 export const sendProduct = async data => {
-  const { data: product } = await axios.post(`${API}/products`, data);
+  const formData = new FormData();
+  formData.append("name", data.name);
+  formData.append("description", data.description);
+  formData.append("image", data.image);
+
+  const { data: product } = await axios.post(`${API}/products`, formData);
   return product;
 };
 export const sendType = async data => {
   const { data: type } = await axios.post(`${API}/types`, data);
   return type;
+};
+export const updateTypes = async data => {
+  const { data: result } = await axios.put(`${API}/types`, data);
+  return result;
 };

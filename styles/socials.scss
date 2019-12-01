@@ -1,15 +1,13 @@
 .socials {
   margin: $boxMargin;
   display: flex;
-  div {
+  .social {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     margin: 0 10px;
-    background: white;
-    border-radius: $radius;
-    box-shadow: 0 2px rgba(145, 145, 145, 0.7);
+    border-radius: 10px;
     height: 100px;
     transition: box-shadow 0.5s ease;
     &:hover > i {
@@ -22,14 +20,37 @@
     span {
       margin: 0 10px;
       transition: margin 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      color: white;
     }
     i {
-      color: $secondColor;
       font-size: 1.8em;
     }
     span {
-      color: $secondColor;
       font-size: 1.2em;
+    }
+    &.twitter {
+      background: #00acee;
+      box-shadow: 0 4px #009bd4;
+    }
+    &.instagram {
+      background-image: radial-gradient(
+        circle 859px at 7.5% 18%,
+        rgba(234, 6, 185, 1) 4.2%,
+        rgba(251, 179, 8, 1) 92.7%
+      );
+      box-shadow: 0 4px rgb(207, 5, 164);
+    }
+    &.telegram {
+      background:#0088cc;
+      box-shadow: 0 4px #0177b3;
+    }
+    &.pinterest {
+      background:#bd081c;
+      box-shadow: 0 4px #9e0718;
+    }
+    &.youtube {
+      background:#ff0000;
+      box-shadow: 0 4px #e40101;
     }
   }
 }

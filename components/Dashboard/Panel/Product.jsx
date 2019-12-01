@@ -3,10 +3,19 @@ import * as api from "../../../src/api";
 export class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: [], product: { Types: [] } };
+    this.state = {
+      products: [],
+      selectedImage: false,
+      image: "",
+      floating: false,
+      product: { Types: [] }
+    };
     this.handleChanges = this.handleChanges.bind(this);
     this.sendProduct = this.sendProduct.bind(this);
     this.selectProduct = this.selectProduct.bind(this);
+    this.handlePriceChanges = this.handlePriceChanges.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
+    this.savePrices = this.savePrices.bind(this);
     this.sendType = this.sendType.bind(this);
   }
   async componentDidMount() {
@@ -16,21 +25,40 @@ export class Product extends Component {
   handleChanges(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+  handleImageChange(e) {
+    if (e.target.files && e.target.files[0]) {
+      this.setState({ image: e.target.files[0] });
+      var reader = new FileReader();
+      reader.onload = e => {
+        this.setState({ selectedImage: e.target.result });
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  }
   selectProduct(id) {
     this.setState({ product: this.state.products.find(item => item.id == id) });
   }
+  handlePriceChanges(e) {
+    this.setState({ [e.target.name]: e.target.value, floating: true });
+  }
+  savePrices() {
+    console.log(this.state);
+  }
   async sendProduct() {
-    const { productName, productDescription, products } = this.state;
-    if (!productName || !productDescription)
+    const { productName, productDescription, image, products } = this.state;
+    if (!productName || !productDescription || !image)
       return alert("لطفا ورودی های خودتون رو چک کنید");
     const product = await api.sendProduct({
       name: productName,
-      description: productDescription
+      description: productDescription,
+      image
     });
     this.setState({
       productName: "",
       productDescription: "",
-      products: [product, ...products]
+      image: "",
+      selectedImage: false,
+      products: [{ ...product, Types: [] }, ...products]
     });
   }
 
@@ -76,23 +104,41 @@ export class Product extends Component {
   }
 
   render() {
-    const { products, product } = this.state;
+    const { products, product, selectedImage } = this.state;
     return (
       <div className="dashboard-container rtl">
         <div className="dashboard-actions">
           <h1>افزودن گروه جدید :</h1>
+          <p>تصویر</p>
+          <label
+            className="image-selector"
+            htmlFor={`product-image`}
+            style={{
+              backgroundImage: selectedImage
+                ? `url(${selectedImage})`
+                : "transparent"
+            }}
+          >
+            +
+          </label>
+          <input
+            type="file"
+            name="image"
+            id="product-image"
+            onChange={this.handleImageChange.bind(this)}
+          />
           <p>نام</p>
           <input
             type="text"
             name="productName"
-            value={this.state.productName}
+            value={this.state.productName || ""}
             onChange={this.handleChanges}
           />
           <p>توضیحات</p>
           <textarea
             type="text"
             name="productDescription"
-            value={this.state.productDescription}
+            value={this.state.productDescription || ""}
             onChange={this.handleChanges}
           ></textarea>
           <br />
@@ -119,7 +165,6 @@ export class Product extends Component {
               })}
             </div>
           </div>
-          <div className="products-splitter">.</div>
           <div>
             <h2>انواع محصولات این گروه</h2>
             {product.Types.length == 0 && "این دسته بندی هیچ آیتمی ندارد"}
@@ -138,7 +183,7 @@ export class Product extends Component {
             )}
             {product.Types.map((item, index) => {
               return (
-                <div key={index} className="type-item">
+                <div key={item.id} className="type-item">
                   <span>{item.code}</span>
                   <span>{item.name}</span>
                   <span>{item.thinkness}</span>
@@ -147,7 +192,15 @@ export class Product extends Component {
                   <span>{item.mood}</span>
                   <span>{item.deliver}</span>
                   <span>{item.unit}</span>
-                  <span>{item.price.toLocaleString()}</span>
+                  <input
+                    type="number"
+                    name={`item-${item.id}`}
+                    onChange={this.handlePriceChanges}
+                    value={
+                      this.state[`item-${item.id}`] ||
+                      item.price.toLocaleString()
+                    }
+                  />
                 </div>
               );
             })}
@@ -168,14 +221,14 @@ export class Product extends Component {
                 onChange={this.handleChanges}
               />
               <input
-                type="text"
+                type="number"
                 name="typeThinkness"
                 placeholder="ضخامت"
                 className="input-type"
                 onChange={this.handleChanges}
               />
               <input
-                type="text"
+                type="number"
                 name="typeWidth"
                 placeholder="عرض"
                 className="input-type"
@@ -210,11 +263,12 @@ export class Product extends Component {
                 onChange={this.handleChanges}
               />
               <input
-                type="text"
+                type="number"
                 name="typePrice"
                 placeholder="قیمت"
                 className="input-type"
                 onChange={this.handleChanges}
+                min={0}
               />
               <button className="btn" onClick={this.sendType}>
                 افزودن
@@ -222,6 +276,13 @@ export class Product extends Component {
             </div>
           </div>
         </div>
+        <button
+          className={`floating-button ${this.state.floating == true &&
+            `active`}`}
+          onClick={this.savePrices}
+        >
+          ذخیره
+        </button>
       </div>
     );
   }

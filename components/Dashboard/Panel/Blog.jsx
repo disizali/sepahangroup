@@ -28,9 +28,21 @@ export class Blog extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   handleImageChange(e) {
-    this.setState({ [e.target.name]: e.target.files[0] });
+    if (e.target.files && e.target.files[0]) {
+      this.setState({
+        [e.target.name]: e.target.files[0]
+      });
+      var reader = new FileReader();
+      reader.onload = e => {
+        this.setState({
+          selectedImage: e.target.result
+        });
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
   }
   async sendPost() {
+    console.log(this.state);
     const { title, body, image, posts } = this.state;
     if (!title || !body || !image) {
       return alert("لطفا ورودی های خودتون رو چک کنید");
@@ -87,13 +99,29 @@ export class Blog extends Component {
     }
   }
   render() {
-    const { title, body, image, posts, editable } = this.state;
+    const { title, body, image, posts, editable, selectedImage } = this.state;
     return (
       <div className="dashboard-container rtl">
         <div className="dashboard-actions">
           <h1>{editable ? "ویرایش مقاله" : "افزودن مقاله جدید"}</h1>
           <p>تصویر</p>
-          <input type="file" name="image" onChange={this.handleImageChange} />
+          <label
+            className="image-selector"
+            htmlFor={`post-image`}
+            style={{
+              backgroundImage: selectedImage
+                ? `url(${selectedImage})`
+                : "transparent"
+            }}
+          >
+            +
+          </label>
+          <input
+            type="file"
+            name="image"
+            id="post-image"
+            onChange={this.handleImageChange.bind(this)}
+          />
           <p>سربرگ</p>
           <input
             type="text"

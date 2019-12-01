@@ -17,7 +17,6 @@ export class dashboard extends Component {
     const token = jsCookie.get("authtoken");
     if (token) {
       const result = await api.login({ token });
-      console.log(result);
       if (result == "verified") {
         this.setState({ garanted: 1, loading: false });
       } else if (result == "failed") {

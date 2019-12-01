@@ -92,9 +92,9 @@
         margin: 0 10px;
         transition: color 0.5s;
         &.active {
-          color: $primaryColor;
+          color: gold;
           &::after {
-            background: $primaryColor;
+            background: gold;
           }
         }
         cursor: pointer;

@@ -13,8 +13,8 @@ var storage = multer.diskStorage({
     cb(null, file.originalname);
   }
 });
-const upload = multer({ storage });
 
+const upload = multer({ storage });
 app
   .route("/api/posts")
   .get(async (req, res) => {
