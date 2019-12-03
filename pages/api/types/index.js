@@ -4,16 +4,11 @@ import cors from "cors";
 const app = express();
 const { Product, Type } = db.models;
 
-var whitelist = ["http://sepahangroup.com", "http://www.sepahangroup.com"];
 var corsOptions = {
-  origin: function(origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  }
-};
+  origin: "*",
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 app.use(cors(corsOptions));
 
 app
