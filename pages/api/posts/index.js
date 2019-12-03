@@ -1,5 +1,5 @@
 import express from "express";
-import path from "path";
+import cors from "cors";
 import { sequelize as db } from "../../../models";
 import multer from "multer";
 const app = express();

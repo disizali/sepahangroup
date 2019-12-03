@@ -1,6 +1,7 @@
 import express from "express";
-const app = express();
 import { sequelize as db } from "../../../models";
+import cors from "cors";
+const app = express();
 const { Product, Type } = db.models;
 
 var whitelist = ["http://sepahangroup.com", "http://www.sepahangroup.com"];
