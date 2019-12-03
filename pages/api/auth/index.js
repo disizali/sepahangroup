@@ -16,7 +16,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app
   .route("/api/auth")
-  .post(req, res => {
+  .post((req, res) => {
     const { username, password, token } = req.body;
     if ((!username || !password) && !token) return res.send("failed");
     if (token) {
