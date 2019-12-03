@@ -2,6 +2,19 @@ import express from "express";
 const app = express();
 import { sequelize as db } from "../../../models";
 const { Product, Type } = db.models;
+
+var whitelist = ["http://sepahangroup.com", "http://www.sepahangroup.com"];
+var corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+};
+app.use(cors(corsOptions));
+
 app
   .route("/api/types")
   .get(async (req, res) => {

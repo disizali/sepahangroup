@@ -3,6 +3,19 @@ import { sequelize as db } from "../../../models";
 import multer from "multer";
 
 const app = express();
+
+var whitelist = ["http://sepahangroup.com", "http://www.sepahangroup.com"];
+var corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+};
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 var storage = multer.diskStorage({
