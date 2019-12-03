@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "chalipa@Apweb123456",
     "database": "sepahangroup",
     "host": "127.0.0.1",
     "dialect": "mysql"
