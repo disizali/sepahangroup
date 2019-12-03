@@ -1,7 +1,7 @@
 import express from "express";
 import { sequelize as db } from "../../../models";
 import multer from "multer";
-
+import cors from "cors";
 const app = express();
 
 var whitelist = ["http://sepahangroup.com", "http://www.sepahangroup.com"];
