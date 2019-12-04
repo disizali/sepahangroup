@@ -30,9 +30,13 @@ export const updatePost = async data => {
   const { data: result } = await axios.put(`${API}/posts`, data);
   return result;
 };
+export const getProduct = async name => {
+  const { data: product } = await axios.get(`${API}/products/${name}`);
+  return product;
+};
 export const getProducts = async () => {
-  const { data: posts } = await axios.get(`${API}/products`);
-  return posts;
+  const { data: products } = await axios.get(`${API}/products`);
+  return products;
 };
 export const sendProduct = async data => {
   const formData = new FormData();

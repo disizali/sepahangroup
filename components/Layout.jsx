@@ -6,7 +6,7 @@ export class Layout extends Component {
   render() {
     return (
       <main>
-        <Navbar />
+        <Navbar products={this.props.products} />
         <div className="children">{this.props.children}</div>
         <Footer posts={this.props.posts} />
       </main>

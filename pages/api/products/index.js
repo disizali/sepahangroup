@@ -6,7 +6,7 @@ const app = express();
 var corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+};
 app.use(cors(corsOptions));
 
 app.use(express.json());
@@ -20,7 +20,6 @@ var storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage });
-
 const { Product, Type } = db.models;
 
 app
@@ -40,6 +39,11 @@ app
       return res.send(await Product.create({ ...req.body, image: fileName }));
     });
   });
+
+app.route("/api/products/:name").get((req, res) => {
+  console.log(req.params.name);
+});
+
 export const config = {
   api: {
     bodyParser: false
