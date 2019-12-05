@@ -1,0 +1,57 @@
+.product-header {
+  text-align: center;
+  margin: 20px 0;
+  padding: $boxPadding;
+  display: flex;
+  > div:first-child {
+    margin-left: 10px;
+    width: 30%;
+    background-image: radial-gradient(
+      circle farthest-corner at 10% 20%,
+      rgba(252, 150, 120, 1) 0%,
+      rgba(247, 108, 127, 1) 100.4%
+    );
+    border-radius: $radius;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > div {
+      width: 70%;
+      position: relative;
+      > h1 {
+        display: inline-block;
+        color: white;
+      }
+      > span {
+        margin: 0 10px;
+        color: white;
+      }
+      > div {
+        position: relative;
+        img {
+          width: 70%;
+          border-radius: $radius;
+          filter: drop-shadow(0 20px 10px rgba(0, 0, 0, 0.2));
+        }
+        p {
+          color: white;
+        }
+      }
+      border-radius: $radius;
+      padding: $boxPadding;
+      border: 1px solid white;
+    }
+  }
+  > div:last-child {
+    margin-right: 10px;
+    background: 70%;
+  }
+}
+.product-types {
+  background: white !important;
+  color: red;
+  width: 100%;
+  border-radius: $radius;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}

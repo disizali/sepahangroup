@@ -33,7 +33,11 @@ export class Navbar extends Component {
                       {item.map((item, index) => {
                         return (
                           <li key={`item-${item.id}`}>
-                            <span>{item.name}</span>
+                            <Link href={`/products/${encodeURI(item.name)}`}>
+                              <a>
+                                <span>{item.name}</span>
+                              </a>
+                            </Link>
                           </li>
                         );
                       })}
