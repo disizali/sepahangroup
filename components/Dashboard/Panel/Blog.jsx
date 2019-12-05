@@ -18,14 +18,20 @@ export class Blog extends Component {
     this.updatePost = this.updatePost.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
+    this.handleBodyChanges = this.handleBodyChanges.bind(this);
   }
   async componentDidMount() {
+    const editor = document.querySelector("#editor p");
+    editor.classList = [...editor.classList, "ql-align-right ql-direction-rtl"];
     const posts = await api.getPosts();
     this.setState({ posts });
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+  handleBodyChanges(body) {
+    this.setState({ body });
   }
   handleImageChange(e) {
     if (e.target.files && e.target.files[0]) {
@@ -64,6 +70,46 @@ export class Blog extends Component {
       editable: id
     });
   }
+  modules() {
+    return {
+      toolbar: [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ header: 1 }, { header: 2 }],
+        ["bold", "italic", "underline", "strike", "blockquote"],
+        [
+          { list: "ordered" },
+          { list: "bullet" },
+          { indent: "-1" },
+          { indent: "+1" }
+        ],
+        [{ direction: "rtl" }],
+        [{ align: [] }],
+        [{ color: [] }],
+        ["image", "link"],
+        [{ background: [] }],
+        ["clean"]
+      ]
+    };
+  }
+  formats() {
+    return [
+      "header",
+      "bold",
+      "italic",
+      "underline",
+      "strike",
+      "blockquote",
+      "list",
+      "bullet",
+      "indent",
+      "align",
+      "link",
+      "color",
+      "background",
+      "direction",
+      "image"
+    ];
+  }
   cancelUpdate() {
     this.setState({ editable: false, image: "", title: "", body: "" });
   }
@@ -100,6 +146,8 @@ export class Blog extends Component {
   }
   render() {
     const { title, body, image, posts, editable, selectedImage } = this.state;
+    const ReactQuill = require("react-quill");
+
     return (
       <div className="dashboard-container rtl">
         <div className="dashboard-actions">
@@ -130,12 +178,23 @@ export class Blog extends Component {
             onChange={this.handleChange}
           />
           <p>متن</p>
-          <textarea
+          <div id="editor">
+            <ReactQuill
+              value={body}
+              className="panel-editor rtl text-center text-dark"
+              theme="snow"
+              modules={this.modules()}
+              formats={this.formats()}
+              style={{ direction: "rtl" }}
+              onChange={this.handleBodyChanges.bind(this)}
+            />
+          </div>
+          {/* <textarea
             type="text"
             name="body"
             value={body}
             onChange={this.handleChange}
-          ></textarea>
+          ></textarea> */}
           <br />
           <div style={{ display: editable ? "none" : "block" }}>
             <button onClick={this.sendPost}>SEND</button>
