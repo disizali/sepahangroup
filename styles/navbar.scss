@@ -34,6 +34,7 @@ nav > ul {
           list-style: none;
           display: flex;
           flex-direction: column;
+          min-width: 200px;
           > li {
             cursor: pointer;
             > span {
