@@ -31,7 +31,7 @@ export const updatePost = async data => {
   return result;
 };
 export const getProduct = async name => {
-  const { data: product } = await axios.get(`${API}/products/${name}`);
+  const { data: product } = await axios.get(`${API}/products/${encodeURI(name)}`);
   return product;
 };
 export const getProducts = async () => {

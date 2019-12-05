@@ -34,23 +34,27 @@ nav > ul {
           list-style: none;
           display: flex;
           flex-direction: column;
+          min-width: 200px;
           > li {
             cursor: pointer;
-            > span {
-              color: white;
-              width: 100%;
-              position: relative;
-              &::before{
-                content: "";
-                position: absolute;
-                margin: auto;
-                top: 0;
-                bottom: 0;
-                right: -10px;
-                width: 5px;
-                height: 5px;
-                background: rgba(255,255,255,0.2);
-                border-radius: $radius;
+            > a {
+              text-decoration: none;
+              > span {
+                color: white;
+                width: 100%;
+                position: relative;
+                &::before {
+                  content: "";
+                  position: absolute;
+                  margin: auto;
+                  top: 0;
+                  bottom: 0;
+                  right: -10px;
+                  width: 5px;
+                  height: 5px;
+                  background: rgba(255, 255, 255, 0.2);
+                  border-radius: $radius;
+                }
               }
             }
             &:hover {
@@ -65,9 +69,7 @@ nav > ul {
         border: none;
         border-left: none !important;
         padding: 10px 10px;
-        > span {
-          color: white;
-        }
+       
       }
     }
     &:hover > ul {
@@ -90,6 +92,7 @@ nav {
   border-radius: $radius;
   z-index: 3;
   transition: all 0.3s;
+  left: 0;
   .contact {
     display: flex;
     align-items: center;
