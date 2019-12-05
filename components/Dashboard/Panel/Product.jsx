@@ -15,15 +15,21 @@ export class Product extends Component {
     this.selectProduct = this.selectProduct.bind(this);
     this.handlePriceChanges = this.handlePriceChanges.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
+    this.handleDescriptionChanges = this.handleDescriptionChanges.bind(this);
     this.savePrices = this.savePrices.bind(this);
     this.sendType = this.sendType.bind(this);
   }
   async componentDidMount() {
+    const editor = document.querySelector("#editor p");
+    editor.classList = [...editor.classList, "ql-align-right ql-direction-rtl"];
     const products = await api.getProducts();
     this.setState({ products, product: products[0] });
   }
   handleChanges(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+  handleDescriptionChanges(productDescription) {
+    this.setState({ productDescription });
   }
   handleImageChange(e) {
     if (e.target.files && e.target.files[0]) {
@@ -61,7 +67,46 @@ export class Product extends Component {
       products: [{ ...product, Types: [] }, ...products]
     });
   }
-
+  modules() {
+    return {
+      toolbar: [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ header: 1 }, { header: 2 }],
+        ["bold", "italic", "underline", "strike", "blockquote"],
+        [
+          { list: "ordered" },
+          { list: "bullet" },
+          { indent: "-1" },
+          { indent: "+1" }
+        ],
+        [{ direction: "rtl" }],
+        [{ align: [] }],
+        [{ color: [] }],
+        ["image", "link"],
+        [{ background: [] }],
+        ["clean"]
+      ]
+    };
+  }
+  formats() {
+    return [
+      "header",
+      "bold",
+      "italic",
+      "underline",
+      "strike",
+      "blockquote",
+      "list",
+      "bullet",
+      "indent",
+      "align",
+      "link",
+      "color",
+      "background",
+      "direction",
+      "image"
+    ];
+  }
   async sendType() {
     const {
       typeCode,
@@ -105,6 +150,8 @@ export class Product extends Component {
 
   render() {
     const { products, product, selectedImage } = this.state;
+    const ReactQuill = require("react-quill");
+
     return (
       <div className="dashboard-container rtl">
         <div className="dashboard-actions">
@@ -135,12 +182,23 @@ export class Product extends Component {
             onChange={this.handleChanges}
           />
           <p>توضیحات</p>
-          <textarea
+          <div id="editor">
+            <ReactQuill
+              value={this.state.productDescription}
+              className="panel-editor rtl text-center text-dark"
+              theme="snow"
+              modules={this.modules()}
+              formats={this.formats()}
+              style={{ direction: "rtl" }}
+              onChange={this.handleDescriptionChanges.bind(this)}
+            />
+          </div>
+          {/* <textarea
             type="text"
             name="productDescription"
             value={this.state.productDescription || ""}
             onChange={this.handleChanges}
-          ></textarea>
+          ></textarea> */}
           <br />
           <button onClick={this.sendProduct}>SEND</button>
         </div>
@@ -205,72 +263,75 @@ export class Product extends Component {
               );
             })}
             <hr />
-            <div style={{ display: "flex" }}>
+            <div className="new-product">
               <input
                 type="text"
                 name="typeCode"
                 placeholder="کد"
-                className="input-type"
+                className="input-type col-lg-1 col-md-6 col-sm-12"
                 onChange={this.handleChanges}
               />
               <input
                 type="text"
                 name="typeName"
                 placeholder="نام"
-                className="input-type"
+                className="input-type col-lg-1 col-md-6 col-sm-12"
                 onChange={this.handleChanges}
               />
               <input
                 type="number"
                 name="typeThinkness"
                 placeholder="ضخامت"
-                className="input-type"
+                className="input-type col-lg-1 col-md-6 col-sm-12"
                 onChange={this.handleChanges}
               />
               <input
                 type="number"
                 name="typeWidth"
                 placeholder="عرض"
-                className="input-type"
+                className="input-type col-lg-1 col-md-6 col-sm-12"
                 onChange={this.handleChanges}
               />
               <input
                 type="text"
                 name="typeBrand"
                 placeholder="برند"
-                className="input-type"
+                className="input-type col-lg-1 col-md-6 col-sm-12"
                 onChange={this.handleChanges}
               />
               <input
                 type="text"
                 name="typeMood"
                 placeholder="حالت"
-                className="input-type"
+                className="input-type col-lg-1 col-md-6 col-sm-12"
                 onChange={this.handleChanges}
               />
               <input
                 type="text"
                 name="typeDeliver"
                 placeholder="تحویل"
-                className="input-type"
+                className="input-type col-lg-1 col-md-6 col-sm-12"
                 onChange={this.handleChanges}
               />
               <input
                 type="text"
                 name="typeUnit"
                 placeholder="واحد"
-                className="input-type"
+                className="input-type col-lg-1 col-md-6 col-sm-12"
                 onChange={this.handleChanges}
               />
               <input
                 type="number"
                 name="typePrice"
                 placeholder="قیمت"
-                className="input-type"
+                className="input-type col-lg-1 col-md-6 col-sm-12"
                 onChange={this.handleChanges}
                 min={0}
               />
-              <button className="btn" onClick={this.sendType}>
+              <button
+                className="btn col col-lg-1 col-md-6 col-sm-12"
+                onClick={this.sendType}
+              >
                 افزودن
               </button>
             </div>

@@ -6,7 +6,7 @@ export class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tab: 1
+      tab: 2
     };
     this.changeTab = this.changeTab.bind(this);
     this.getTabPanel = this.getTabPanel.bind(this);

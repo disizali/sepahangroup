@@ -24,8 +24,13 @@ export class Navbar extends Component {
               </a>
             </Link>
             <ul>
-              <li>x1</li>
-              <li>x2</li>
+              {this.props.products.map((item, index) => {
+                return (
+                  <li>
+                    <span>{item.name}</span>
+                  </li>
+                );
+              })}
             </ul>
           </li>
         </ul>

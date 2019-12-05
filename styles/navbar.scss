@@ -25,7 +25,7 @@ nav ul {
       border-radius: $radius;
       display: flex;
       flex-direction: column;
-      height: 0;
+      height: auto;
       transition: all 0.3s;
       opacity: 0;
       overflow: hidden;
@@ -36,6 +36,9 @@ nav ul {
         border: none;
         border-left: none !important;
         padding: 10px 10px;
+        span{
+          color: white;
+        }
         &:hover {
           background: rgb(59, 63, 85);
         }
@@ -43,7 +46,6 @@ nav ul {
     }
     &:hover > ul {
       opacity: 1;
-      height: 400%;
     }
   }
 }
