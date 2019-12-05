@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import _ from "lodash";
 export class Navbar extends Component {
   render() {
     return (
@@ -23,11 +24,20 @@ export class Navbar extends Component {
                 <span>محصولات</span>
               </a>
             </Link>
-            <ul>
-              {this.props.products.map((item, index) => {
+            <ul className="d-flex">
+              {}
+              {_.chunk(this.props.products, 8).map((item, index) => {
                 return (
-                  <li>
-                    <span>{item.name}</span>
+                  <li key={`group-${index}`}>
+                    <ul>
+                      {item.map((item, index) => {
+                        return (
+                          <li key={`item-${item.id}`}>
+                            <span>{item.name}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </li>
                 );
               })}
