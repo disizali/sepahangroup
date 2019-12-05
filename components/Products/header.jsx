@@ -16,6 +16,7 @@ export class Header extends Component {
           </div>
         </div>
         <div className="product-types">
+          {product.Types.length == 0 && "هنوز آیتمی اضافه نشده است"}
           {product.Types.map((item, index) => {
             return (
               <li key={index}>
