@@ -1,9 +1,9 @@
-.product-header {
+.product-page {
   text-align: center;
   margin: 20px 0;
   padding: $boxPadding;
   display: flex;
-  > div:first-child {
+  > .product-header {
     margin-left: 10px;
     width: 30%;
     background-image: radial-gradient(
@@ -43,18 +43,4 @@
       border: 1px solid white;
     }
   }
-  > div:last-child {
-    margin-right: 10px;
-    background: 70%;
-  }
-}
-.product-types {
-  background: white !important;
-  color: #dadada;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  border-radius: $radius;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }

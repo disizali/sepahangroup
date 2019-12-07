@@ -1,0 +1,45 @@
+.product-page {
+  > .product-types {
+    display: flex;
+    flex-direction: column;
+    background: white !important;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    border-radius: $radius;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    ul {
+      list-style: none;
+    }
+    margin-right: 10px;
+    background: 70%;
+    position: relative;
+    > .no-type {
+      color: #dadada;
+    }
+    > table {
+      right: 10%;
+      width: 90%;
+      border-collapse: separate;
+      border-spacing: 0 1em;
+      > thead {
+        color: #dadada;
+      }
+      > tbody {
+        tr {
+          border: 2px solid blue;
+          margin: 20px 0;
+          border-radius: $radius;
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+          td {
+            padding: 10px;
+          }
+        }
+        tr:nth-child(2n) {
+          margin: 20px 0;
+        }
+      }
+    }
+  }
+}
