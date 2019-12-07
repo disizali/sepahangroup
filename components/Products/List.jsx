@@ -28,15 +28,15 @@ export class List extends Component {
             {types.map((item, index) => {
               return (
                 <tr key={index}>
-                  <td>{item.code}</td>
-                  <td>{item.name}</td>
-                  <td>{item.thinkness}</td>
-                  <td>{item.width}</td>
-                  <td>{item.brand}</td>
-                  <td>{item.mood}</td>
-                  <td>{item.deliver}</td>
-                  <td>{item.unit}</td>
-                  <td>{item.price}</td>
+                  <td>{item.code == 0 ? "-" : item.code}</td>
+                  <td>{item.name == 0 ? "-" : item.name}</td>
+                  <td>{item.thinkness == 0 ? "-" : item.thinkness}</td>
+                  <td>{item.width == 0 ? "-" : item.width}</td>
+                  <td>{item.brand == 0 ? "-" : item.brand}</td>
+                  <td>{item.mood == 0 ? "-" : item.mood}</td>
+                  <td>{item.deliver == 0 ? "-" : item.deliver}</td>
+                  <td>{item.unit == 0 ? "-" : item.unit}</td>
+                  <td>{item.price == 0 ? "تماس بگیرید" : item.price.toLocaleString()}</td>
                 </tr>
               );
             })}
