@@ -26,7 +26,7 @@ export class Navbar extends Component {
             </Link>
             <ul className="d-flex">
               {}
-              {_.chunk(this.props.products, 8).map((item, index) => {
+              {_.chunk(this.props.products,14 ).map((item, index) => {
                 return (
                   <li key={`group-${index}`}>
                     <ul>

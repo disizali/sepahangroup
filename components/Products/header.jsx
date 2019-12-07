@@ -11,7 +11,7 @@ export class Header extends Component {
             <span>&gt;</span>
             <div>
               <img src={`/uploads/images/${product.image}`} />
-              <p>{product.description}</p>
+              <div dangerouslySetInnerHTML={{__html : product.description}} />
             </div>
           </div>
         </div>
