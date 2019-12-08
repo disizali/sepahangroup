@@ -48,7 +48,6 @@ export class Blog extends Component {
     }
   }
   async sendPost() {
-    console.log(this.state);
     const { title, body, image, posts } = this.state;
     if (!title || !body || !image) {
       return alert("لطفا ورودی های خودتون رو چک کنید");
@@ -208,16 +207,14 @@ export class Blog extends Component {
         <h2>مقالات</h2>
         <div className="posts-list" style={{ textAlign: "left" }}>
           <div className="posts-list-header">
-            <span width="40%">سربرگ</span>
-            <span width="40%">متن</span>
-            <span width="20%">عملیات</span>
+            <span width="60%">سربرگ</span>
+            <span width="40%">عملیات</span>
           </div>
           <div className="posts-list-data">
             {posts.map((item, index) => {
               return (
                 <div key={index}>
                   <span>{item.title}</span>
-                  <span>{item.body}</span>
                   <div>
                     <button
                       className="remove"

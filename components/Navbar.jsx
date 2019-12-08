@@ -7,7 +7,7 @@ export class Navbar extends Component {
       <nav className="rtl">
         <ul>
           <li>
-            <span>SEPAHANGROUP</span>
+            <span>لوله و اتصالات گازی سپاهان</span>
           </li>
           <li>
             <Link href="/">

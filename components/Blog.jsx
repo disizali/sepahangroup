@@ -13,7 +13,7 @@ export class Blog extends Component {
             <img src={`/uploads/images/${posts[0].image}`} />
             <div>
               <h2>{posts[0].title}</h2>
-              <p>{posts[0].body}</p>
+              <div dangerouslySetInnerHTML={{ __html: posts[0].body }} />
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@ export class Blog extends Component {
                   </div>
                   <div>
                     <span>مشاهده</span>
-                    <i className="fas fa-arrow-left"/>
+                    <i className="fas fa-arrow-left" />
                   </div>
                 </li>
               );

@@ -2,6 +2,10 @@ import axios from "axios";
 import * as config from "./config";
 const { API } = config;
 import FormData from "form-data";
+
+import axiosRetry from 'axios-retry';
+axiosRetry(axios, { retries: 10 });
+
 export const login = async data => {
   const { data: result } = await axios.post(`${API}/auth`, data);
   return result;
@@ -51,7 +55,11 @@ export const sendType = async data => {
   const { data: type } = await axios.post(`${API}/types`, data);
   return type;
 };
-export const updateTypes = async data => {
+export const updateType = async data => {
   const { data: result } = await axios.put(`${API}/types`, data);
+  return result;
+};
+export const deleteType = async data => {
+  const { data: result } = await axios.delete(`${API}/types`, data);
   return result;
 };

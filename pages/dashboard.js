@@ -4,7 +4,7 @@ import Panel from "../components/Dashboard/Panel/Index.jsx";
 import "../styles/dashboard/index.scss";
 import jsCookie from "js-cookie";
 import * as api from "../src/api";
-
+import Head from "next/head";
 export class dashboard extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +34,9 @@ export class dashboard extends Component {
     const { garanted, loading } = this.state;
     return (
       <div>
+        <Head>
+          <title>لوله و اتصالات گازی سپاهان</title>
+        </Head>
         {garanted == 0 && loading == false && (
           <Login changeGaranted={this.changeGaranted.bind(this)} />
         )}
