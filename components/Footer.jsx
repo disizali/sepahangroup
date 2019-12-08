@@ -4,33 +4,36 @@ export class Footer extends Component {
   render() {
     return (
       <footer className="rtl">
-        <div className="footer-links">
-          <h3>لینک های مرتبط</h3>
-          <ul>
-            <li>قیمت آهن</li>
-            <li>قیمت لوله</li>
-          </ul>
+        <div>
+          <img
+            src={require("../public/images/logo.png")}
+            alt="Sepahang group Logo | لوله و اتصالات سپاهان"
+          />
+          <p>
+            آهن آلات سپاهان در سال 1386 فعالیت حرفه ای خود را در زمینه خرید و
+            فروش آهن آلات آغاز نمود و در ادامه به منظور اطلاع رسانی شفاف و
+            سریع‌تر سایت حاضر را راه‌اندازی کرد. شما می‌توانید در آهن آلات
+            سپاهان اقدام به خرید انواع آهن آلات ساختمانی، صنعتی و سایر محصولات
+            وارداتی از جمله میلگرد، تیرآهن، ورق سیاه، نبشی، ناودانی، پروفیل، ورق
+            های آلیاژی و صنعتی، ورق های روغنی، گالوانیزه، انواع مقاطع استنلس
+            استیل، مس و آلومینیوم نمایید.
+          </p>
         </div>
-        <div className="footer-blog">
-          <h3>آخرین مقالات</h3>
-          <ul>
-            {this.props.posts.map((item, index) => {
-              return <li key={index}>{item.title}</li>;
-            })}
-          </ul>
-        </div>
-        <div className="footer-contact">
-          <h3>تماس با ما</h3>
-          <ul>
-            <li>
-              <span>آدرس</span>
-              <span>ایران - تهران</span>
-            </li>
-            <li>
-              <span>تلفن</span>
-              <span>۰۲۱-۶۲۸۴۲۰۰۰</span>
-            </li>
-          </ul>
+        <div>
+          <div>
+            <i className="fas fa-phone" />
+            <div>
+              <span>۰۲۱</span>
+              <strong>۶۲۸۴۲۰۰۰</strong>
+            </div>
+          </div>
+          <div>
+            <h3>خدمات مشتریان</h3>
+            <p>
+              مدیریت ارتباط با مشتریان سپاهان گروپ آماده هرگونه پاسخگویی در
+              زمینه‌ی پیگیری، شکایات و نیاز مشتریان است!
+            </p>
+          </div>
         </div>
       </footer>
     );

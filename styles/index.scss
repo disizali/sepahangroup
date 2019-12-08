@@ -11,7 +11,7 @@
 @import "blog";
 @import "about";
 @import "footer";
-@import 'products/index.scss';
+@import "products/index.scss";
 
 .rtl {
   direction: rtl;
@@ -26,4 +26,9 @@ body {
 }
 .children {
   padding-top: 60px;
+}
+button {
+  &:focus {
+    outline: none;
+  }
 }

@@ -6,11 +6,7 @@
   > .product-header {
     margin-left: 10px;
     width: 30%;
-    background-image: radial-gradient(
-      circle farthest-corner at 10% 20%,
-      rgba(252, 150, 120, 1) 0%,
-      rgba(247, 108, 127, 1) 100.4%
-    );
+    background-color: $primaryColor;
     border-radius: $radius;
     min-height: 70vh;
     display: flex;
@@ -30,12 +26,14 @@
       > div {
         position: relative;
         img {
-          width: 70%;
+          width: 100%;
           border-radius: $radius;
           filter: drop-shadow(0 20px 10px rgba(0, 0, 0, 0.2));
         }
-        p {
-          color: white;
+        div {
+          margin-top: 10px;
+          color: #f1f1f1;
+          text-align: justify;
         }
       }
       border-radius: $radius;

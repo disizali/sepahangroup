@@ -65,7 +65,7 @@ export class Blog extends Component {
     this.setState({
       title: post.title,
       body: post.body,
-      // image: post.image,
+      image: post.image,
       editable: id
     });
   }
@@ -158,9 +158,11 @@ export class Blog extends Component {
             style={{
               backgroundImage: selectedImage
                 ? `url(${selectedImage})`
+                : editable
+                ? `url(${require(`../../../public/uploads/images/${image}`)}`
                 : "transparent"
             }}
-          >
+          > 
             +
           </label>
           <input
@@ -188,19 +190,13 @@ export class Blog extends Component {
               onChange={this.handleBodyChanges.bind(this)}
             />
           </div>
-          {/* <textarea
-            type="text"
-            name="body"
-            value={body}
-            onChange={this.handleChange}
-          ></textarea> */}
           <br />
           <div style={{ display: editable ? "none" : "block" }}>
-            <button onClick={this.sendPost}>SEND</button>
+            <button onClick={this.sendPost} className="primary">ارسال</button>
           </div>
           <div style={{ display: editable ? "flex" : "none" }}>
-            <button onClick={this.updatePost}>SAVE</button>
-            <button onClick={this.cancelUpdate}>CANCEL</button>
+            <button onClick={this.updatePost} className="edit">ذخیره</button>
+            <button onClick={this.cancelUpdate} className="remove">لغو</button>
           </div>
         </div>
         <hr />

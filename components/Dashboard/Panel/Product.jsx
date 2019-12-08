@@ -208,7 +208,9 @@ export class Product extends Component {
             onChange={this.handleChanges}
           ></textarea> */}
           <br />
-          <button onClick={this.sendProduct}>SEND</button>
+          <button onClick={this.sendProduct} className="primary">
+            ارسال
+          </button>
         </div>
         <hr />
         <div className="products-list">
