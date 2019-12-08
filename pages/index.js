@@ -31,7 +31,7 @@ export class index extends Component {
     return (
       <Layout posts={this.props.posts} products={this.props.products}>
         <Head>
-          <title>سپاهان گروپ</title>
+          <title>لوله و اتصالات گازی سپاهان</title>
         </Head>
         <Slider2 />
         <Static2 />

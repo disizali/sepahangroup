@@ -8,6 +8,7 @@ export class Product extends Component {
       selectedImage: false,
       image: "",
       floating: false,
+      editableType: false,
       product: { Types: [] }
     };
     this.handleChanges = this.handleChanges.bind(this);
@@ -16,6 +17,7 @@ export class Product extends Component {
     this.handlePriceChanges = this.handlePriceChanges.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleDescriptionChanges = this.handleDescriptionChanges.bind(this);
+    this.startUpdateType = this.startUpdateType.bind(this);
     this.savePrices = this.savePrices.bind(this);
     this.sendType = this.sendType.bind(this);
   }
@@ -148,12 +150,18 @@ export class Product extends Component {
     this.setState({ product: { ...product, Types: [type, ...product.Types] } });
   }
 
+  startUpdateType(editableType) {
+    this.setState({ editableType });
+  }
   render() {
+    const { editableType } = this.state;
     const { products, product, selectedImage } = this.state;
     const ReactQuill = require("react-quill");
 
     return (
-      <div className="dashboard-container rtl">
+      <div
+        className={`dashboard-container rtl ${editableType ? "blured" : ""}`}
+      >
         <div className="dashboard-actions">
           <h1>افزودن گروه جدید :</h1>
           <p>تصویر</p>
@@ -241,7 +249,11 @@ export class Product extends Component {
             )}
             {product.Types.map((item, index) => {
               return (
-                <div key={item.id} className="type-item">
+                <div
+                  key={item.id}
+                  className="type-item"
+                  onClick={() => this.startUpdateType(item.id)}
+                >
                   <span>{item.code}</span>
                   <span>{item.name}</span>
                   <span>{item.thinkness}</span>
@@ -344,6 +356,10 @@ export class Product extends Component {
         >
           ذخیره
         </button>
+
+        <div className={`type-modal ${editableType ? "open" : ""}`}>
+          {editableType}
+        </div>
       </div>
     );
   }
