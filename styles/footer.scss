@@ -1,32 +1,66 @@
 footer {
+  padding: 20px;
   border-top: 10px solid $primaryColor;
   background: $secondColor;
   margin: 0;
   display: flex;
   justify-content: space-around;
-  div {
-    text-align: center;
+  > div:nth-child(1) {
     width: calc(100% / 3);
-    h3 {
-      color: white;
+    display: flex;
+    align-items: center;
+    img {
+      width: 35%;
+      filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
     }
-    ul {
-      padding: 0;
-      list-style: none;
-      li {
-        margin: 10px 0;
-        color: $secondHoverColor;
-        transition: 0.5s;
-        &:hover {
+    p {
+      color: #dbdbdb;
+      font-size: 0.85rem;
+      text-align: justify;
+    }
+  }
+  > div:nth-child(2) {
+    width: calc(100% / 3);
+    display: flex;
+    justify-content: space-around;
+    > div:nth-child(1) {
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      i {
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+        transform: rotateZ(-135deg);
+        color: $primaryColor;
+        font-size: 2rem;
+      }
+
+      > div {
+        span {
+          color: white;
+          font-size: 1.1rem;
+        }
+        strong {
           color: $primaryColor;
-          margin-right: 5px;
+          margin-left: 5px;
+          font-size: 1.5rem;
         }
       }
     }
-    &.footer-contact {
-      span {
-        display: inline-block;
-        margin: 0 5px;
+    > div:nth-child(2) {
+      height: 50%;
+      justify-content: space-around;
+      display: flex;
+      flex-direction: column;
+      h3 {
+        color: white;
+        margin-right: 10px;
+      }
+      p {
+        color: #7c818a;
+        margin-right: 10px;
       }
     }
   }

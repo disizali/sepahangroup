@@ -10,10 +10,13 @@ export class Blog extends Component {
             <span>آخرین پست</span>
           </div>
           <div className="post-content">
-            <img src={`/uploads/images/${posts[0].image}`} />
+            <img
+              src={require(`../public/uploads/images/${posts[0].image}`)}
+              alt={posts[0].title}
+            />
             <div>
-              <h2>{posts[0].title}</h2>
-              <div dangerouslySetInnerHTML={{ __html: posts[0].body }} />
+              <h1>{posts[0].title}</h1>
+              <div dangerouslySetInnerHTML={{ __html: posts[0].body.slice(0,150) + "..." }} />
             </div>
           </div>
         </div>
@@ -27,7 +30,11 @@ export class Blog extends Component {
               return (
                 <li key={index}>
                   <div>
-                    <img src={`/uploads/images/${item.image}`} />
+                    {/* <img src={`/uploads/images/${item.image}`} /> */}
+                    <img
+                      src={require(`../public/uploads/images/${item.image}`)}
+                      alt={item.title}
+                    />
                     <h3>{item.title}</h3>
                   </div>
                   <div>
