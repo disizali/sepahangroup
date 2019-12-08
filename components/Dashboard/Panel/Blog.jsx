@@ -196,7 +196,7 @@ export class Blog extends Component {
           </div>
           <div style={{ display: editable ? "flex" : "none" }}>
             <button onClick={this.updatePost} className="edit">ذخیره</button>
-            <button onClick={this.cancelUpdate} className="remove">لغو</button>
+            <button onClick={this.cancelUpdate} className="danger">لغو</button>
           </div>
         </div>
         <hr />
@@ -213,7 +213,7 @@ export class Blog extends Component {
                   <span>{item.title}</span>
                   <div>
                     <button
-                      className="remove"
+                      className="danger"
                       onClick={() => this.deletePost(item.id)}
                     >
                       حذف
