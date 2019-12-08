@@ -9,7 +9,7 @@ export class Header extends Component {
           <h1>{product.name}</h1>
           <span>»</span>
           <div>
-            <img src={`/uploads/images/${encodeURI(product.image)}`} />
+            <img src={require(`../../public/uploads/images/${product.image}`)} />
             <div dangerouslySetInnerHTML={{ __html: product.description }} />
           </div>
         </div>
