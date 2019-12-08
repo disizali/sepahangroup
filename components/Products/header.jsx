@@ -8,10 +8,10 @@ export class Header extends Component {
           <span>«</span>
           <h1>{product.name}</h1>
           <span>»</span>
-            <div>
-              <img src={`/uploads/images/${product.image}`} />
-              <div dangerouslySetInnerHTML={{__html : product.description}} />
-            </div>
+          <div>
+            <img src={`/uploads/images/${encodeURI(product.image)}`} />
+            <div dangerouslySetInnerHTML={{ __html: product.description }} />
+          </div>
         </div>
       </div>
     );
@@ -19,3 +19,4 @@ export class Header extends Component {
 }
 
 export default Header;
+
