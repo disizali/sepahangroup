@@ -20,7 +20,7 @@ export class Employees extends Component {
                   <div>
                     <span>کارمند شماره {item}</span>
                     <span>مسئول بخش شماره {item}</span>
-                    <strong>داخلی {item}</strong>
+                    <strong>۶۲۸۴۲۰۰۰ ۰۲۱</strong>
                   </div>
                 </li>
               );
