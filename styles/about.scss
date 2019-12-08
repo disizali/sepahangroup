@@ -28,18 +28,18 @@
       margin: auto;
     }
     &::after {
-        content: "";
-        width: 10px;
-        height: 10px;
-        background: $lightColor;
-        position: absolute;
-        left: -20px;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-      }
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: $lightColor;
+      position: absolute;
+      left: -20px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
   }
   p {
-    color: $lightColor;
+    color: #686c6d;
   }
 }
