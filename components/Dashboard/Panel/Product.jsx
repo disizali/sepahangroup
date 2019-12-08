@@ -293,14 +293,14 @@ export class Product extends Component {
                 onChange={this.handleChanges}
               />
               <input
-                type="number"
+                type="text"
                 name="typeThinkness"
                 placeholder="ضخامت"
                 className="input-type col-lg-1 col-md-6 col-sm-12"
                 onChange={this.handleChanges}
               />
               <input
-                type="number"
+                type="text"
                 name="typeWidth"
                 placeholder="عرض"
                 className="input-type col-lg-1 col-md-6 col-sm-12"
@@ -335,7 +335,7 @@ export class Product extends Component {
                 onChange={this.handleChanges}
               />
               <input
-                type="number"
+                type="text"
                 name="typePrice"
                 placeholder="قیمت"
                 className="input-type col-lg-1 col-md-6 col-sm-12"

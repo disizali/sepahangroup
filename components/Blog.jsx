@@ -16,7 +16,7 @@ export class Blog extends Component {
             />
             <div>
               <h1>{posts[0].title}</h1>
-              <div dangerouslySetInnerHTML={{ __html: posts[0].body.slice(0,150) + "..." }} />
+              <div dangerouslySetInnerHTML={{ __html: posts[0].body.slice(0,300) + "..." }} />
             </div>
           </div>
         </div>
