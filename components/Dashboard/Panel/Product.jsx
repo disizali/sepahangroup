@@ -18,6 +18,8 @@ export class Product extends Component {
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleDescriptionChanges = this.handleDescriptionChanges.bind(this);
     this.startUpdateType = this.startUpdateType.bind(this);
+    this.cancelUpdateType = this.cancelUpdateType.bind(this);
+    this.updateType = this.updateType.bind(this);
     this.savePrices = this.savePrices.bind(this);
     this.sendType = this.sendType.bind(this);
   }
@@ -25,7 +27,10 @@ export class Product extends Component {
     const editor = document.querySelector("#editor p");
     editor.classList = [...editor.classList, "ql-align-right ql-direction-rtl"];
     const products = await api.getProducts();
-    this.setState({ products, product: products[0] });
+    this.setState({
+      products,
+      product: products[0]
+    });
   }
   handleChanges(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -45,6 +50,8 @@ export class Product extends Component {
   }
   selectProduct(id) {
     this.setState({ product: this.state.products.find(item => item.id == id) });
+    const typesTable = document.getElementById("types-table");
+    typesTable.scrollIntoView();
   }
   handlePriceChanges(e) {
     this.setState({ [e.target.name]: e.target.value, floating: true });
@@ -149,9 +156,49 @@ export class Product extends Component {
     });
     this.setState({ product: { ...product, Types: [type, ...product.Types] } });
   }
-
-  startUpdateType(editableType) {
+  startUpdateType(id) {
+    const editableType = this.state.product.Types.find(item => item.id == id);
     this.setState({ editableType });
+  }
+  cancelUpdateType() {
+    Object.entries(this.state).forEach((item, index) => {
+      if (item[0].startsWith("update")) {
+        this.setState({ [item[0]]: undefined });
+      }
+    });
+    this.setState({ editableType: false });
+  }
+  async updateType() {
+    const { editableType, product, products } = this.state;
+    let updatedData = { targetId: editableType.id };
+    Object.entries(this.state).forEach((item, index) => {
+      if (item[0].startsWith("update")) {
+        updatedData[item[0].replace("update", "").toLocaleLowerCase()] =
+          item[1];
+      }
+    });
+    const result = await api.updateType(updatedData);
+    if (result == "done") {
+      const newProducts = products.map((productItem, index) => {
+        if (productItem.id == product.id) {
+          productItem.Types.map(typeItem => {
+            if (typeItem.id == editableType.id) {
+              Object.entries(updatedData).forEach(updatedItem => {
+                typeItem[updatedItem[0]] = updatedItem[1];
+              });
+            }
+            return typeItem;
+          });
+        }
+        return productItem;
+      });
+      console.log(newProducts);
+      this.setState({
+        product: newProducts.find(item => item.id == product.id),
+        products: newProducts
+      });
+      this.cancelUpdateType();
+    }
   }
   render() {
     const { editableType } = this.state;
@@ -162,7 +209,7 @@ export class Product extends Component {
       <div
         className={`dashboard-container rtl ${editableType ? "blured" : ""}`}
       >
-        <div className="dashboard-actions">
+        <div className={`dashboard-actions ${editableType ? "blured" : ""}`}>
           <h1>افزودن گروه جدید :</h1>
           <p>تصویر</p>
           <label
@@ -201,19 +248,12 @@ export class Product extends Component {
               onChange={this.handleDescriptionChanges.bind(this)}
             />
           </div>
-          {/* <textarea
-            type="text"
-            name="productDescription"
-            value={this.state.productDescription || ""}
-            onChange={this.handleChanges}
-          ></textarea> */}
           <br />
           <button onClick={this.sendProduct} className="primary">
             ارسال
           </button>
         </div>
-        <hr />
-        <div className="products-list">
+        <div className={`product-list ${editableType ? "blured" : ""}`}>
           <div className="groups">
             <h2>لیست گروه ها</h2>
             <div>
@@ -236,46 +276,44 @@ export class Product extends Component {
           <div>
             <h2>انواع محصولات این گروه</h2>
             {product.Types.length == 0 && "این دسته بندی هیچ آیتمی ندارد"}
-            {product.Types.length != 0 && (
-              <div className="type-header">
-                <span>کد</span>
-                <span>نام</span>
-                <span>ضخامت</span>
-                <span>عرض</span>
-                <span>برند</span>
-                <span>حالت</span>
-                <span>تحویل</span>
-                <span>واحد</span>
-                <span>قیمت</span>
-              </div>
-            )}
-            {product.Types.map((item, index) => {
-              return (
-                <div
-                  key={item.id}
-                  className="type-item"
-                  onClick={() => this.startUpdateType(item.id)}
-                >
-                  <span>{item.code}</span>
-                  <span>{item.name}</span>
-                  <span>{item.thinkness}</span>
-                  <span>{item.width}</span>
-                  <span>{item.brand}</span>
-                  <span>{item.mood}</span>
-                  <span>{item.deliver}</span>
-                  <span>{item.unit}</span>
-                  <input
-                    type="number"
-                    name={`item-${item.id}`}
-                    onChange={this.handlePriceChanges}
-                    value={
-                      this.state[`item-${item.id}`] ||
-                      item.price.toLocaleString()
-                    }
-                  />
-                </div>
-              );
-            })}
+            <table id="types-table">
+              {product.Types.length != 0 && (
+                <thead className="type-header">
+                  <tr>
+                    <th>کد</th>
+                    <th>نام</th>
+                    <th>ضخامت</th>
+                    <th>عرض</th>
+                    <th>برند</th>
+                    <th>حالت</th>
+                    <th>تحویل</th>
+                    <th>واحد</th>
+                    <th>قیمت</th>
+                  </tr>
+                </thead>
+              )}
+              <tbody>
+                {product.Types.map((item, index) => {
+                  return (
+                    <tr
+                      key={item.id}
+                      className="type-item"
+                      onClick={() => this.startUpdateType(item.id)}
+                    >
+                      <td>{item.code}</td>
+                      <td>{item.name}</td>
+                      <td>{item.thinkness}</td>
+                      <td>{item.width}</td>
+                      <td>{item.brand}</td>
+                      <td>{item.mood}</td>
+                      <td>{item.deliver}</td>
+                      <td>{item.unit}</td>
+                      <td>{item.price}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
             <hr />
             <div className="new-product">
               <input
@@ -358,9 +396,115 @@ export class Product extends Component {
         >
           ذخیره
         </button>
-
         <div className={`type-modal ${editableType ? "open" : ""}`}>
-          {editableType}
+          <div className="header rtl">
+            <i className="fal fa-pen" />
+            <div>
+              <span>ویرایش</span>
+              <h2>{editableType.code}</h2>
+            </div>
+          </div>
+          <ul>
+            <li>
+              <span>کد</span>
+              <input
+                type="text"
+                name="updateCode"
+                className="input-type"
+                value={this.state[`updateCode`] || editableType.code}
+                onChange={this.handleChanges}
+              />
+            </li>
+            <li>
+              <span>نام</span>
+              <input
+                type="text"
+                name="updateName"
+                className="input-type"
+                value={this.state[`updateName`] || editableType.name}
+                onChange={this.handleChanges}
+              />
+            </li>
+            <li>
+              <span>ضخامت</span>
+              <input
+                type="text"
+                name="updateThinkness"
+                className="input-type"
+                value={this.state[`updateThinkness`] || editableType.thinkness}
+                onChange={this.handleChanges}
+              />
+            </li>
+            <li>
+              <span>عرض</span>
+              <input
+                type="text"
+                name="updateWidth"
+                className="input-type"
+                value={this.state[`updateWidth`] || editableType.width}
+                onChange={this.handleChanges}
+              />
+            </li>
+            <li>
+              <span>برند</span>
+              <input
+                type="text"
+                name="updateBrand"
+                className="input-type"
+                value={this.state[`updateBrand`] || editableType.brand}
+                onChange={this.handleChanges}
+              />
+            </li>
+            <li>
+              <span>حالت</span>
+              <input
+                type="text"
+                name="updateMood"
+                className="input-type"
+                value={this.state[`updateMood`] || editableType.mood}
+                onChange={this.handleChanges}
+              />
+            </li>
+            <li>
+              <span>تحویل</span>
+              <input
+                type="text"
+                name="updateDeliver"
+                className="input-type"
+                value={this.state[`updateDeliver`] || editableType.deliver}
+                onChange={this.handleChanges}
+              />
+            </li>
+            <li>
+              <span>واحد</span>
+              <input
+                type="text"
+                name="updateUnit"
+                className="input-type"
+                value={this.state[`updateUnit`] || editableType.unit}
+                onChange={this.handleChanges}
+              />
+            </li>
+            <li>
+              <span>قیمت</span>
+              <input
+                type="text"
+                name="updatePrice"
+                className="input-type"
+                value={this.state[`updatePrice`] || editableType.price}
+                onChange={this.handleChanges}
+                min={0}
+              />
+            </li>
+            <li>
+              <button className="btn edit" onClick={this.updateType}>
+                ذخیره
+              </button>
+              <button className="btn danger" onClick={this.cancelUpdateType}>
+                لغو
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     );

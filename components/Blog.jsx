@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Link from "next/link";
+
 export class Blog extends Component {
   render() {
     const { posts } = this.props;
@@ -16,7 +18,11 @@ export class Blog extends Component {
             />
             <div>
               <h1>{posts[0].title}</h1>
-              <div dangerouslySetInnerHTML={{ __html: posts[0].body.slice(0,300) + "..." }} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: posts[0].body.slice(0, 300) + "..."
+                }}
+              />
             </div>
           </div>
         </div>
@@ -37,10 +43,14 @@ export class Blog extends Component {
                     />
                     <h3>{item.title}</h3>
                   </div>
-                  <div>
-                    <span>مشاهده</span>
-                    <i className="fas fa-arrow-left" />
-                  </div>
+                  <Link href={`/posts/${encodeURI(item.title)}`}>
+                    <a>
+                      <div>
+                        <span>مشاهده</span>
+                        <i className="fas fa-arrow-left" />
+                      </div>
+                    </a>
+                  </Link>
                 </li>
               );
             })}

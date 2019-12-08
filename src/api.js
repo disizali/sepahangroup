@@ -15,6 +15,12 @@ export const getPosts = async () => {
   const { data: posts } = await axios.get(`${API}/posts`);
   return posts;
 };
+
+export const getPost = async title => {
+  const { data: post } = await axios.get(`${API}/posts/${encodeURI(title)}`);
+  return post;
+};
+
 export const sendPost = async data => {
   const formData = new FormData();
   formData.append("title", data.title);
@@ -34,6 +40,7 @@ export const updatePost = async data => {
   const { data: result } = await axios.put(`${API}/posts`, data);
   return result;
 };
+
 export const getProduct = async name => {
   const { data: product } = await axios.get(`${API}/products/${encodeURI(name)}`);
   return product;

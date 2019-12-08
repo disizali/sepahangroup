@@ -46,7 +46,10 @@
     color: white;
     font-size: 1rem;
     border-radius: $radius;
-    &.remove {
+    &:hover{
+      cursor: pointer;
+    }
+    &.danger {
       background-image: radial-gradient(
         circle farthest-corner at 10% 20%,
         rgba(238, 56, 56, 1) 0%,
