@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Link from "next/link";
 
 export class Blog extends Component {
+  getPosition(string, subString, index) {
+    return string.split(subString, index).join(subString).length;
+  }
   render() {
     const { posts } = this.props;
     return (
@@ -20,7 +23,10 @@ export class Blog extends Component {
               <h1>{posts[0].title}</h1>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: posts[0].body.slice(0, 300) + "..."
+                  __html: posts[0].body.substring(
+                    0,
+                    this.getPosition(posts[0].body, "</p>", 2) + 4
+                  )
                 }}
               />
             </div>
@@ -36,7 +42,10 @@ export class Blog extends Component {
               return (
                 <li key={index}>
                   <div>
-                    <img src={`/uploads/images/${encodeURI(item.image)}`} alt={item.title} />
+                    <img
+                      src={`/uploads/images/${encodeURI(item.image)}`}
+                      alt={item.title}
+                    />
                     {/* <img */}
                     {/* src={require(`../public/uploads/images/${item.image}`)} */}
                     {/* alt={item.title} */}
