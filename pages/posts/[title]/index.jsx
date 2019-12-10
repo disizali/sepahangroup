@@ -34,7 +34,10 @@ export default class Post extends Component {
             className="post-image"
           />
           <h1>{post.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: post.body }} />
+          <div
+            dangerouslySetInnerHTML={{ __html: post.body }}
+            className="rtl"
+          />
         </section>
       </Layout>
     );
