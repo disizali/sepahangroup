@@ -1,12 +1,21 @@
 import React, { Component } from "react";
-
-export class Slider extends Component {
+const data = [
+  {
+    header: "لوله فلزاطلاع از آخرین قیمت لوله های گازی",
+    description:
+      "لوله گازی می تواند در هر دو نوع لوله فولادی و یا پلی اتیلن باشد که جهت انتقال گاز مورد استفاده قرار می گیرند."
+  },
+  {
+    header: "خرید و فروش لوله های گازی",
+    description:
+      "قیمت لوله گازی سپاهان , لوله گازی روکار , لوله گازی توکار , خرید لوله گازی , لوله گازرسانی , لوله گاز سپاهان اصفهان , لوله گاز API , آهن ملل."
+  }
+];
+export class Slider2 extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selected: 1
-    };
-    this.changeSelected = this.changeSelected.bind(this);
+    this.state = { selected: 1 };
+    this.selected = this.setState.bind(this);
   }
   changeSelected(selected) {
     this.setState({ selected });
@@ -14,31 +23,37 @@ export class Slider extends Component {
   render() {
     const { selected } = this.state;
     return (
-      <section className="slider">
+      <section className="slider2 rtl">
+        <div>
+          <h1 className={selected == 1 ? `active` : ``}>{data[0].header}</h1>
+          <p className={selected == 1 ? `active` : ``}>{data[0].description}</p>
+          <h1 className={selected == 2 ? `active` : ``}>{data[1].header}</h1>
+          <p className={selected == 2 ? `active` : ``}>{data[1].description}</p>
+          <button>جزئیات</button>
+        </div>
+        <i className="square" />
+        <i className="square-2" />
         <div>
           <img
-            src={`/images/slide1.jpg`}
-            className={`${selected == 1 && "active"}`}
-            width="100%"
+            src={`/images/slide1.png`}
+            className={selected == 1 ? `active` : ``}
           />
           <img
-            src={`/images/slide2.jpg`}
-            className={`${selected == 2 && "active"}`}
-            width="100%"
+            src={`/images/slide2.png`}
+            className={selected == 2 ? `active` : ``}
           />
           <div className="switcher">
-            <div className={`selector selected-${selected}`}></div>
             <button
-              className={`${selected == 1 ? "active" : ""}`}
+              className={selected == 1 ? `active` : ``}
               onClick={() => this.changeSelected(1)}
             >
-              اسلاید شماره ۱
+              1
             </button>
             <button
-              className={`${selected == 2 ? "active" : ""}`}
+              className={selected == 2 ? `active` : ``}
               onClick={() => this.changeSelected(2)}
             >
-               اسلاید شماره ۲
+              2
             </button>
           </div>
         </div>
@@ -47,4 +62,4 @@ export class Slider extends Component {
   }
 }
 
-export default Slider;
+export default Slider2;

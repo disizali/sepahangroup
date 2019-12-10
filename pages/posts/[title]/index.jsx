@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../../../src/api";
 import Layout from "../../../components/Layout";
+import Head from "next/head";
 export default class Post extends Component {
   static async getInitialProps(context) {
     const post = await api.getPost(context.query.title);
@@ -23,6 +24,9 @@ export default class Post extends Component {
     const { post, products } = this.props;
     return (
       <Layout products={products}>
+        <Head>
+          <title>لوله و اتصالات گازی سپاهان - {post.title}</title>
+        </Head>
         <section className="post-page">
           <img
             src={require(`../../../public/uploads/images/${post.image}`)}

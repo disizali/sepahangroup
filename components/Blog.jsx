@@ -36,10 +36,10 @@ export class Blog extends Component {
               return (
                 <li key={index}>
                   <div>
-                    <img src={`/uploads/images/${item.image}`} />
+                    <img src={`/uploads/images/${encodeURI(item.image)}`} alt={item.title} />
                     {/* <img */}
-                      {/* src={require(`../public/uploads/images/${item.image}`)} */}
-                      {/* alt={item.title} */}
+                    {/* src={require(`../public/uploads/images/${item.image}`)} */}
+                    {/* alt={item.title} */}
                     {/* /> */}
                     <h3>{item.title}</h3>
                   </div>
@@ -47,7 +47,7 @@ export class Blog extends Component {
                     <a>
                       <div>
                         <span>مشاهده</span>
-                        <i className="fas fa-arrow-left" />
+                        <i className="fas fa-sort-down" />
                       </div>
                     </a>
                   </Link>
