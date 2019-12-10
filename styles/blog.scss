@@ -51,9 +51,16 @@
             height: 50px;
             border-radius: $radius;
           }
+        }
+        > a {
+          text-decoration: none;
           span,
           i {
+            margin: 0 5px;
             color: $lightColor;
+          }
+          i {
+            transform: rotate(90deg);
           }
         }
       }

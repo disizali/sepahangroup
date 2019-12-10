@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Layout from "../components/Layout";
-import Slider2 from "../components/Slider2";
-import Static2 from "../components/Static2";
+import Slider from "../components/Slider";
+import Static from "../components/Static";
 import Employees from "../components/Employees";
 import Image from "../components/Image";
 import Socials from "../components/Socials";
@@ -33,8 +33,8 @@ export class index extends Component {
         <Head>
           <title>لوله و اتصالات گازی سپاهان</title>
         </Head>
-        <Slider2 />
-        <Static2 />
+        <Slider />
+        <Static />
         <About />
         <Employees />
         <Image />

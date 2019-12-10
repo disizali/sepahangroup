@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Layout from "../../../components/Layout";
 import * as api from "../../../src/api";
 import Product from "../../../components/Products/index";
+import Head from "next/head";
+
 export default class ProductPage extends Component {
   static async getInitialProps(context) {
     const { name } = context.query;
@@ -27,7 +29,10 @@ export default class ProductPage extends Component {
   render() {
     return (
       <Layout products={this.props.products} posts={this.props.posts}>
-          <Product product={this.props.product}/>
+        <Head>
+          <title>لوله و اتصالات گازی سپاهان - {this.props.product.name}</title>
+        </Head>
+        <Product product={this.props.product} />
       </Layout>
     );
   }

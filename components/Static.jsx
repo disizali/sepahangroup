@@ -1,38 +1,36 @@
 import React, { Component } from "react";
 
-export class Static extends Component {
+export class Static2 extends Component {
   render() {
     return (
-      <section className="static rtl">
-        <div className="offer box-container">
-          <div className="box-title">
-            <i className="fas fa-fire"></i>
-            <span>پیشنهاد داغ</span>
-          </div>
-          <div className="content">
-            <img src="/images/pd1.jpg" width="100%" />
-            <span>لوله مانیسمان</span>
-          </div>
+      <section className="static2 rtl">
+        <div>
+          <i className="square" />
+          <i className="square-2">
+            <img src="/images/3way.png" alt="" />
+          </i>
         </div>
-        <div className="images box-container">
-          <div className="box-title">
-            <i className="fas fa-star"></i>
-            <span>محبوب ترین محصولات</span>
-          </div>
-          <ul>
-            {[1, 2, 3, 4].map((item, index) => {
-              return (
-                <li key={index}>
-                  <img src={`/images/m${item}.jpg`} />
-                  <span>محصول شماره {item}</span>
-                </li>
-              );
-            })}
-          </ul>
+        <div>
+          <h3>فروش ویژه</h3>
+          <p>
+            مجموعه سپاهان لوله با سال ها تجربه در رابطه با لوله و اتصالات گازی
+            قادر به خرید و فروش لوله گاز در انواع مختلف از قبیل زانوی مانیسمان
+            Benkan، زانوی مانیسمان آریا، زانوی مانیسمان امین، زانوی مانیسمان
+            ایران اتصال، زانوی مانیسمان سحرگاز، لوله سفید ساوه سنگین، لوله سفید
+            گلخانه گرم، لوله سیاه سپاهان معمولی، لوله سیاه شوفاژی یاران و… می
+            باشد.
+          </p>
+          <p>
+            سپاهان لوله علاوه بر خدمات لوله و اتصالات گازی و لوله مانیسمان بدون
+            درز ارائه دهنده جعبه فایر باکس آتش نشانی را نیز می باشد. مشتریان
+            گرامی می توانند جهت کسب اطلاعات بیشتر خرید و فروش لوله گاز از خرید
+            لوله گاز و فروش لوله گاز و جعبه فایر باکس آتش نشانی و لوله مانیسمان
+            بدون درز با کارشناسان سپاهان لوله تماس حاصل فرمایند.
+          </p>
         </div>
       </section>
     );
   }
 }
 
-export default Static;
+export default Static2;
