@@ -3,7 +3,7 @@ import * as config from "./config";
 const { API } = config;
 import FormData from "form-data";
 
-import axiosRetry from 'axios-retry';
+import axiosRetry from "axios-retry";
 axiosRetry(axios, { retries: 10 });
 
 export const login = async data => {
@@ -26,7 +26,6 @@ export const sendPost = async data => {
   formData.append("title", data.title);
   formData.append("body", data.body);
   formData.append("image", data.image);
-
   const { data: post } = await axios.post(`${API}/posts`, formData, {
     headers: { "Content-Type": "multipart/form-data" }
   });
@@ -36,13 +35,23 @@ export const deletePost = async data => {
   const { data: result } = await axios.delete(`${API}/posts`, { data });
   return result;
 };
+
 export const updatePost = async data => {
-  const { data: result } = await axios.put(`${API}/posts`, data);
+  const formData = new FormData();
+  formData.append("id", data.id);
+  formData.append("title", data.title);
+  formData.append("body", data.body);
+  if (data.image != undefined) formData.append("image", data.image);
+  const { data: result } = await axios.put(`${API}/posts`, formData, {
+    headers: { "Content-Type": "multipart/form-data" }
+  });
   return result;
 };
 
 export const getProduct = async name => {
-  const { data: product } = await axios.get(`${API}/products/${encodeURI(name)}`);
+  const { data: product } = await axios.get(
+    `${API}/products/${encodeURI(name)}`
+  );
   return product;
 };
 export const getProducts = async () => {

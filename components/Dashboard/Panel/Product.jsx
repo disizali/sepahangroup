@@ -57,7 +57,7 @@ export class Product extends Component {
     this.setState({ [e.target.name]: e.target.value, floating: true });
   }
   savePrices() {
-    console.log(this.state);
+    // console.log(this.state);
   }
   async sendProduct() {
     const { productName, productDescription, image, products } = this.state;
@@ -192,7 +192,6 @@ export class Product extends Component {
         }
         return productItem;
       });
-      console.log(newProducts);
       this.setState({
         product: newProducts.find(item => item.id == product.id),
         products: newProducts

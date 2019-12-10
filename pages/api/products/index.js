@@ -41,7 +41,7 @@ app
   });
 
 app.route("/api/products/:name").get((req, res) => {
-  console.log(req.params.name);
+  // console.log(req.params.name);
 }); 
 
 export const config = {
