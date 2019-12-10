@@ -7,7 +7,7 @@ const app = express();
 var corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+};
 app.use(cors(corsOptions));
 
 app.use(express.json());
@@ -46,10 +46,19 @@ app
     res.send(result ? "deleted" : "failed2");
   })
   .put(async (req, res) => {
-    const { title, body, image, id } = req.body;
-    if (!title || !body || !image || !id) return res.send("failed");
-    const result = await Post.update(req.body, { where: { id } });
-    res.send(result ? "deleted" : "failed");
+    upload.single("image")(req, {}, async err => {
+      if (err) return res.send("failed1");
+      const { id , title, body } = req.body;
+      if (!id || !title || !body) {
+        return res.send("failed2");
+      }
+      let updatedData = { title, body };
+      if (req.file) {
+        updatedData.image = req.file.filename;
+      }
+      const result = await Post.update(updatedData, { where: { id } });
+      res.send(result ? "updated" : "failed3");
+    });
   });
 
 export const config = {

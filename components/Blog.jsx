@@ -36,11 +36,11 @@ export class Blog extends Component {
               return (
                 <li key={index}>
                   <div>
-                    {/* <img src={`/uploads/images/${item.image}`} /> */}
-                    <img
-                      src={require(`../public/uploads/images/${item.image}`)}
-                      alt={item.title}
-                    />
+                    <img src={`/uploads/images/${item.image}`} />
+                    {/* <img */}
+                      {/* src={require(`../public/uploads/images/${item.image}`)} */}
+                      {/* alt={item.title} */}
+                    {/* /> */}
                     <h3>{item.title}</h3>
                   </div>
                   <Link href={`/posts/${encodeURI(item.title)}`}>

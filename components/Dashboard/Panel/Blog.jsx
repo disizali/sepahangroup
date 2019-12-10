@@ -5,10 +5,11 @@ export class Blog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "تست سربرگ",
-      body: "تست بدنه",
+      title: "",
+      body: "",
       image: "",
       posts: [],
+      selectedImage: false,
       editable: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -26,7 +27,6 @@ export class Blog extends Component {
     const posts = await api.getPosts();
     this.setState({ posts });
   }
-
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -39,9 +39,9 @@ export class Blog extends Component {
         [e.target.name]: e.target.files[0]
       });
       var reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = targetFile => {
         this.setState({
-          selectedImage: e.target.result
+          selectedImage: targetFile.target.result
         });
       };
       reader.readAsDataURL(e.target.files[0]);
@@ -61,14 +61,54 @@ export class Blog extends Component {
   }
   startUpdate(id) {
     const { posts } = this.state;
+    document.getElementById("post-image").value = "";
     const post = posts.find(item => item.id == id);
     this.setState({
       title: post.title,
       body: post.body,
       image: post.image,
-      editable: id
+      editable: id,
+      selectedImage: false
     });
   }
+
+  cancelUpdate() {
+    this.setState({
+      editable: false,
+      image: "",
+      title: "",
+      body: "",
+      selectedImage: false
+    });
+  }
+  async updatePost() {
+    const { title, image, body, editable, posts } = this.state;
+    if (!title || !body)
+      return alert("لطفا ورودی های خودتون رو چک کنید");
+
+    const result = await api.updatePost({ id : editable.id , title, body, image, id: editable });
+    if (result.startsWith("failed")) {
+      return alert("متاسفانه ویرایش ناموفق بود");
+    }
+    const updatedPosts = posts.map((item, index) => {
+      if (item.id == editable) {
+        item.title = title;
+        item.body = body;
+        item.image = image;
+      }
+      return item;
+    });
+    this.setState({
+      title: "",
+      body: "",
+      image: "",
+      posts: updatedPosts,
+      editable: false,
+      selectedImage: false
+    });
+    return alert("ویرایش با موفقیت انجام شد");
+  }
+
   modules() {
     return {
       toolbar: [
@@ -109,34 +149,7 @@ export class Blog extends Component {
       "image"
     ];
   }
-  cancelUpdate() {
-    this.setState({ editable: false, image: "", title: "", body: "" });
-  }
-  async updatePost() {
-    const { title, image, body, editable, posts } = this.state;
-    if (!title || !image || !body)
-      return alert("لطفا ورودی های خودتون رو چک کنید");
-    const result = await api.updatePost({ title, body, image, id: editable });
-    if (result == "failed") {
-      return alert("متاسفانه ویرایش ناموفق بود");
-    }
-    const updatedPosts = posts.map((item, index) => {
-      if (item.id == editable) {
-        item.title = title;
-        item.body = body;
-        item.image = image;
-      }
-      return item;
-    });
-    this.setState({
-      title: "",
-      body: "",
-      image: "",
-      posts: updatedPosts,
-      editable: false
-    });
-    return alert("ویرایش با موفقیت انجام شد");
-  }
+
   async deletePost(id) {
     const result = await api.deletePost({ id });
     if (result) {
@@ -146,7 +159,6 @@ export class Blog extends Component {
   render() {
     const { title, body, image, posts, editable, selectedImage } = this.state;
     const ReactQuill = require("react-quill");
-
     return (
       <div className="dashboard-container rtl">
         <div className="dashboard-actions">
@@ -157,12 +169,12 @@ export class Blog extends Component {
             htmlFor={`post-image`}
             style={{
               backgroundImage: selectedImage
-                ? `url(${selectedImage})`
-                : editable
+                ? `url('${selectedImage}')`
+                : editable && typeof image == "string"
                 ? `url(${require(`../../../public/uploads/images/${image}`)}`
                 : "transparent"
             }}
-          > 
+          >
             +
           </label>
           <input
@@ -192,11 +204,17 @@ export class Blog extends Component {
           </div>
           <br />
           <div style={{ display: editable ? "none" : "block" }}>
-            <button onClick={this.sendPost} className="primary">ارسال</button>
+            <button onClick={this.sendPost} className="primary">
+              ارسال
+            </button>
           </div>
           <div style={{ display: editable ? "flex" : "none" }}>
-            <button onClick={this.updatePost} className="edit">ذخیره</button>
-            <button onClick={this.cancelUpdate} className="danger">لغو</button>
+            <button onClick={this.updatePost} className="edit">
+              ذخیره
+            </button>
+            <button onClick={this.cancelUpdate} className="danger">
+              لغو
+            </button>
           </div>
         </div>
         <hr />
