@@ -127,7 +127,7 @@ $brightness: 50%;
   top: 0;
   bottom: 20px;
   width: 50%;
-  height: 60%;
+  min-height: 80%;
   opacity: 0;
   transition-property: bottom, opacity;
   transition-duration: 0.5s;
