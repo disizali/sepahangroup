@@ -20,7 +20,7 @@ export class Product extends Component {
     this.startUpdateType = this.startUpdateType.bind(this);
     this.cancelUpdateType = this.cancelUpdateType.bind(this);
     this.updateType = this.updateType.bind(this);
-    this.savePrices = this.savePrices.bind(this);
+    this.deleteType = this.deleteType.bind(this);
     this.sendType = this.sendType.bind(this);
   }
   async componentDidMount() {
@@ -55,9 +55,6 @@ export class Product extends Component {
   }
   handlePriceChanges(e) {
     this.setState({ [e.target.name]: e.target.value, floating: true });
-  }
-  savePrices() {
-    // console.log(this.state);
   }
   async sendProduct() {
     const { productName, productDescription, image, products } = this.state;
@@ -198,6 +195,23 @@ export class Product extends Component {
       });
       this.cancelUpdateType();
     }
+  }
+  async deleteType(targetId) {
+    const { products, editableType, product } = this.state;
+    const result = await api.deleteType({ targetId });
+    const newProducts = products.map((productItem, index) => {
+      if (productItem.id == product.id) {
+        productItem.Types = productItem.Types.filter(typeItem => {
+          return typeItem.id != editableType.id;
+        });
+      }
+      return productItem;
+    });
+    this.setState({
+      product: newProducts.find(item => item.id == product.id),
+      products: newProducts
+    });
+    this.cancelUpdateType();
   }
   render() {
     const { editableType } = this.state;
@@ -501,6 +515,12 @@ export class Product extends Component {
               </button>
               <button className="btn danger" onClick={this.cancelUpdateType}>
                 لغو
+              </button>
+              <button
+                className="btn btn-link text-danger"
+                onClick={() => this.deleteType(editableType.id)}
+              >
+                حذف
               </button>
             </li>
           </ul>

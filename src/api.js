@@ -63,7 +63,6 @@ export const sendProduct = async data => {
   formData.append("name", data.name);
   formData.append("description", data.description);
   formData.append("image", data.image);
-
   const { data: product } = await axios.post(`${API}/products`, formData);
   return product;
 };
@@ -76,6 +75,6 @@ export const updateType = async data => {
   return result;
 };
 export const deleteType = async data => {
-  const { data: result } = await axios.delete(`${API}/types`, data);
+  const { data: result } = await axios.delete(`${API}/types`, { data });
   return result;
 };

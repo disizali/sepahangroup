@@ -38,11 +38,10 @@ app
       if (!name || !description) return res.send("failed");
       return res.send(await Product.create({ ...req.body, image: fileName }));
     });
-  });
-
+  })
 app.route("/api/products/:name").get((req, res) => {
   // console.log(req.params.name);
-}); 
+});
 
 export const config = {
   api: {
