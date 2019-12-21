@@ -62,17 +62,12 @@ export class Navbar extends Component {
               </a>
             </Link>
             <ul className="d-flex">
-<<<<<<< HEAD
-              {}
-              {_.chunk(this.props.products,14 ).map((item, index) => {
-=======
               {_.chunk(
                 this.props.products.filter(item =>
                   !item.name.startsWith("لوله")
                 ),
-                8
+               14 
               ).map((item, index) => {
->>>>>>> 696bc53aae007523b1e16ccbffe8e71ce7496421
                 return (
                   <li key={`group-${index}`}>
                     <ul>
