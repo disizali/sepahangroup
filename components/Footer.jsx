@@ -24,7 +24,7 @@ export class Footer extends Component {
             <i className="fas fa-phone" />
             <div>
               <span>۰۲۱</span>
-              <strong>۶۲۸۴۲۰۰۰</strong>
+              <strong>۶۶۲۴۸۹۰۲</strong>
             </div>
           </div>
           <div>
