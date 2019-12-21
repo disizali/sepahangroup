@@ -29,7 +29,7 @@ export class Navbar extends Component {
                 this.props.products.filter(item =>
                   item.name.startsWith("لوله")
                 ),
-                8
+                14
               ).map((item, index) => {
                 return (
                   <li key={`group-${index}`}>
@@ -95,7 +95,7 @@ export class Navbar extends Component {
         <div className="contact">
           <div>
             <div>
-              <span className="number">۶۲۸۴۲۰۰۰</span>
+              <span className="number">۶۶۲۴۸۹۰۲</span>
               <span className="code">۰۲۱ </span>
             </div>
             <span>با ما در تماس باشید</span>

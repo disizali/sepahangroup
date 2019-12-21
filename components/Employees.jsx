@@ -20,7 +20,13 @@ export class Employees extends Component {
                   <div>
                     <span>کارمند شماره {item}</span>
                     <span>مسئول بخش شماره {item}</span>
-                    <strong>۶۲۸۴۲۰۰۰ ۰۲۱</strong>
+
+                    <strong>
+                      {index == 0 && "09123480078"}
+                      {index == 1 && "info@sepahanloleh.ir"}
+                      {index == 2 && "02166237104"}
+                      {index == 3 && "02166248902"}
+                    </strong>
                   </div>
                 </li>
               );
